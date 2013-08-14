@@ -1,133 +1,138 @@
 
 .btn {
-  padding:        5px 12px;
-  margin-top:     10px;
-  margin-bottom:  10px;
-  background: $grayLighter;
-  border: 1px solid $grayLighter;
   @include box-shadow(none);
   @include transition(background 100ms linear);
+  @include border-radius(0);
+  font-family: $font-family-sans-serif;
+  font-weight: 300;
+  color: inherit;
+  text-shadow: 0 1px 1px #fff;
+  background-color: #fff;
+  border: 1px solid $gray-light;
   
   &:hover,
   &:active {
-    background: $white;
-    border: 1px solid $white;
     @include transition(background 100ms linear);
     @include box-shadow(none);
+    color: inherit;
+    background: darken($gray-lighter,5%);
+    border: 1px solid darken($gray-light,5%);
   }
   
   // Button Colors
   &.btn-primary {
-    background: $btnPrimaryBackground;
-    border: 1px solid $btnPrimaryBackground;
+    color: #fff;
+    text-shadow: 0 1px 1px darken($brand-primary,10%);
+    background: $brand-primary;
+    border: 1px solid darken($brand-primary,2%);
     
     &:hover,
     &:active {
-      background: lighten($btnPrimaryBackground,5%);
-      border: 1px solid lighten($btnPrimaryBackground,5%);
       @include box-shadow(none);
+      background: lighten($brand-primary,5%);
+      border: 1px solid lighten($brand-primary,5%);
     }
   }
   
   &.btn-info {
-    background: $btnInfoBackground;
-    border: 1px solid $btnInfoBackground;    
+    color: #fff;
+    text-shadow: 0 1px 1px darken($brand-info,10%);
+    background: $brand-info;
+    border: 1px solid darken($brand-info,5%);    
     &:hover,
     &:active {
-      background: lighten($btnInfoBackground,8%);
-      border: 1px solid lighten($btnInfoBackground,8%);
       @include box-shadow(none);
+      background: lighten($brand-info,5%);
+      border: 1px solid lighten($brand-info,5%);
     }
   }
   
   &.btn-success {
-    background: $btnSuccessBackground;
-    border: 1px solid $btnSuccessBackground;    
+    color: #fff;
+    text-shadow: 0 1px 1px darken($brand-success,10%);
+    background: $brand-success;
+    border: 1px solid $brand-success;    
     &:hover,
     &:active {
-      background: lighten($btnSuccessBackground,5%);
-      border: 1px solid lighten($btnSuccessBackground,5%);
       @include box-shadow(none);
+      background: lighten($brand-success,5%);
+      border: 1px solid lighten($brand-success,5%);
     }
   }
   
-  &.btn-warning {
-    background: $btnWarningBackground;
-    border: 1px solid $btnWarningBackground;    
-    &:hover,
-    &:active {
-      background: lighten($btnWarningBackground,5%);
-      border: 1px solid lighten($btnWarningBackground,5%);
-      @include box-shadow(none);
-    }
-  }
+  // &.btn-warning {
+  //   background: $btnWarningBackground;
+  //   border: 1px solid $btnWarningBackground;    
+  //   &:hover,
+  //   &:active {
+  //     background: lighten($btnWarningBackground,5%);
+  //     border: 1px solid lighten($btnWarningBackground,5%);
+  //     @include box-shadow(none);
+  //   }
+  // }
   
-  &.btn-danger {
-    background: $btnDangerBackground;
-    border: 1px solid $btnDangerBackground;    
-    &:hover,
-    &:active {
-      background: lighten($btnDangerBackground,5%);
-      border: 1px solid lighten($btnDangerBackground,5%);
-      @include box-shadow(none);
-    }
-  }
+  // &.btn-danger {
+  //   background: $btnDangerBackground;
+  //   border: 1px solid $btnDangerBackground;    
+  //   &:hover,
+  //   &:active {
+  //     background: lighten($btnDangerBackground,5%);
+  //     border: 1px solid lighten($btnDangerBackground,5%);
+  //     @include box-shadow(none);
+  //   }
+  // }
   
-  &.btn-inverse {
-    background: $btnInverseBackground;
-    border: 1px solid $btnInverseBackground;    
-    &:hover,
-    &:active {
-      background: lighten($btnInverseBackground,5%);
-      border: 1px solid lighten($btnInverseBackground,5%);
-      @include box-shadow(none);
-    }
-  }
+  // &.btn-inverse {
+  //   background: $btnInverseBackground;
+  //   border: 1px solid $btnInverseBackground;    
+  //   &:hover,
+  //   &:active {
+  //     background: lighten($btnInverseBackground,5%);
+  //     border: 1px solid lighten($btnInverseBackground,5%);
+  //     @include box-shadow(none);
+  //   }
+  // }
   
-  &.btn-link {
-    background: transparent;
-    border: 1px solid transparent;
-  }
+  // &.btn-link {
+  //   background: transparent;
+  //   border: 1px solid transparent;
+  // }
   
   // Button Sizes
+  // ------------------------
+  
   // Large
-  &.btn-large {
-    padding: $paddingLarge;
-    font-size: $fontSizeLarge;
-    @include border-radius($borderRadiusLarge);
+  &.btn-lg {
+    @include border-radius(0);
+    padding: $padding-large-vertical $padding-large-horizontal;  
+    font-size: $font-size-large;
   }
-  &.btn-large [class^="icon-"],
-  &.btn-large [class*=" icon-"] {
-    margin-top: 4px;
-  }  
+
+  &.btn-lg [class^="icon-"],
+  &.btn-lg [class*=" icon-"] { margin-top: 4px; }  
 
   // Small
-  &.btn-small {
-    padding: $paddingSmall;
-    font-size: $fontSizeSmall;
-    @include border-radius($borderRadiusSmall);
-  }
-  &.btn-small [class^="icon-"],
-  &.btn-small [class*=" icon-"] {
-    margin-top: 0;
-  }
-  &.btn-mini [class^="icon-"],
-  &.btn-mini [class*=" icon-"] {
-    margin-top: -1px;
-  }
-
-  // Mini
-  &.btn-mini {
-    padding: $paddingMini;
-    font-size: $fontSizeMini;
-    @include border-radius($borderRadiusSmall);
+  &.btn-sm {
+    @include border-radius(0);
+    padding: $padding-small-vertical $padding-small-horizontal;
+    font-size: $font-size-small;
   }
   
-  // Disabled State
-  &.disabled,
-  &[disabled] {
-    @include opacity(55);
-  }
+  &.btn-sm [class^="icon-"],
+  &.btn-sm [class*=" icon-"] { margin-top: 0; }
+  
+
+  // Mini
+  &.btn-xs { @include border-radius(0); }
+
+  &.btn-mini [class^="icon-"],
+  &.btn-mini [class*=" icon-"] { margin-top: -1px; }
+    
+  // // Disabled State
+  // &.disabled,
+  // &[disabled] {
+  //   @include opacity(55);
+  // }
   
 }
 

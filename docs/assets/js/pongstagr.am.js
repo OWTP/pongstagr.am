@@ -1,16 +1,15 @@
-/*!
- * jQuery Pongstagr.am Plugin 
+/* ==========================================================================
+ * jQuery Pongstagr.am Plugin v2.0.77
+ * ==========================================================================
  * Copyright (c) 2013 Pongstr Ordillo
- * Version: 2.0.6
+ *
  * Code license under Apache License v2.0
  * http://www.apache.org/licenses/LICENSE-2.0
- * Requires: jQuery v1.9 and Bootstrap 3.2 js
- */
+ * Requires: jQuery v1.10.1 and Bootstrap 3.0
+ * ========================================================================= */
 
-;(function ($, window, document, undefined){
-  
-  "use strict";
-  
+;(function ($, window, document, undefined){ "use strict";
+    
   function renderHTML( targetElement, request, pager ){
     var galleryList      = '<ul class="thumbnails"></ul>',
         galleryContainer = '<div class="row-fluid">' + galleryList + '</div>',
