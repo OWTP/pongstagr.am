@@ -24,14 +24,27 @@
 @import url("http://fonts.googleapis.com/css?family=Lato:300,400,700");
 
 
+
 // Body
 // --------------------------
+
+*:focus { outline: 0 none; }  // remove outline on all focused elements.
+
 html,
 body { min-height: 100%; }
 
 body { 
+  color: #fff;
+  font-family: $font-family-sans-serif;
+  font-weight: 400;
   background: url("../img/img.jpg") top center fixed no-repeat;
   background-size: cover;
+}
+
+a {
+  &:hover,
+  &:active,
+  &:visited { text-decoration: none; }
 }
 
 [role="main"] {
@@ -98,6 +111,7 @@ header {
 .docs {
   @include box-sizing(border-box);
   padding: 25px;
+  padding-top: 5px;
   margin: 10px 0;
   background: rgba($gray-darker,0.75);
   font-weight: 300;
