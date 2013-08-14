@@ -27,7 +27,7 @@ Pongstagr.am is a jquery plugin that lets you display your instagram media to yo
 3. **jquery** must be initialised first and so as **bootstrap.js** plugins:
 
 ```html
-<script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 <script src='path/to/js/bootstrap.min.js'></script>  
 <script src='path/to/js/pongstagr.am.js'></script>  
 ```
@@ -84,7 +84,8 @@ pager      : null     // boolean, options:  true or false (enables/disable load 
 #### Acknowledgements 
   
   - **[Bootstrap](http://twitter.github.io/bootstrap/)** is created by [@mdo](http://twitter.com/mdo) & [@fat](http://twitter.com/fat)
-
+  - **[Bootstrap-Sass]()**
+  - **[Font Awesome]()**
 ---------
 
 **License:**

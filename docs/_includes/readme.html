@@ -15,9 +15,9 @@
   </p>
 
   <ol>
-    <li>Instagram account, User ID and Access Token</li>
-    <li>jQuery 1.8+</li>
-    <li>bootstrap-modal.js (or bootstrap.js || bootstrap.min.js )</li>
+    <li>Instagram account, User ID and Access Token.</li>
+    <li>jQuery 1.10.1+ (or jQuery 1.9.1 will also do).</li>
+    <li>Bootstrap JS, actually Bootstrap Modal and its dependancies.</li>
   </ol>
 
   <p>
@@ -48,32 +48,35 @@
             </p>
             
 <pre>
-  <span class="comment">&lt;!-- Include stylesheets to header --&gt;</span>
-  <span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"/path/to/css/boostrap.min.css"</span> <span class="tag">/&gt;</span>
-  <span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"/path/to/css/boostrap-responsive.min.css"</span> <span class="tag">/&gt;</span>
-  <span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"/path/to/css/pongstagr.am.css"</span> <span class="tag">/&gt;</span>
+<span class="comment">&lt;!-- Include stylesheets to header --&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"/path/to/css/pongstagr.am.css"</span> <span class="tag">/&gt;</span>
 
-  <span class="comment">&lt;!-- Include Javascripts to footer --&gt;</span>
-  &lt;script</span> <span class="attr">href=</span><span class="value">"//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
-  &lt;script</span> <span class="attr">href=</span><span class="value">"/path/to/js/boostrap.min.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
-  &lt;script</span> <span class="attr">href=</span><span class="value">"/path/to/js/pongstagr.am.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
+<span class="comment">&lt;!-- Include Javascripts to footer --&gt;</span>
+&lt;script</span> <span class="attr">href=</span><span class="value">"//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
+&lt;script</span> <span class="attr">href=</span><span class="value">"//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
+&lt;script</span> <span class="attr">href=</span><span class="value">"/path/to/js/pongstagr.am.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
 </pre>
 
+            <p class="text-muted">
+              <em>You might need to include <a href="http://fontawesome.io/" target="_blank">Fontawesome stylesheet</a> if you'd like to turn the like and comment icons on.</em>
+            </p>
             <p>
-              <strong>the call on the plugin like this: </strong>
+              <strong>then call on the plugin like this: </strong>
             </p>
             
 <pre>
-  &lt;script&gt;</span>
-    $(<span class="value">document</span>)</span>.<span class="attr">ready</span>(<span class="attr">function</span>(){
+&lt;script&gt;</span>
+  $(<span class="value">document</span>)</span>.<span class="attr">ready</span>(<span class="attr">function</span>(){
 
-        $(<span class="value">'div#selector'</span>).<span class="attr">pongstgrm</span>({
-          accessId    : <span class="pair">YourAccessID</span>,
-          accessToken : <span class="pair">YourAccessToken</span>
-        });
-    
-    });  
-  <span class="tag">&lt;/script&gt;</span>
+      $(<span class="value">'div#selector'</span>).<span class="attr">pongstgrm</span>({
+        accessId    : <span class="pair">YourAccessID</span>,
+        accessToken : <span class="pair">YourAccessToken</span>
+      });
+  
+  });  
+<span class="tag">&lt;/script&gt;</span>
 </pre>
 
             <p>
