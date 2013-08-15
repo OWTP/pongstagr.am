@@ -83,27 +83,27 @@ $(window).load(function(){ "use strict";
    * showValue is the number of media you would like to show i.e., 8
    *
    */
-  // function loadGram( target, showValue ){
-  //   var usr = '39666111',
-  //       tkn = usr + '.1fb234f.c3901000b4944a549fd5fd2310c63780',
-  //       tgt = '#' + target;
+  function loadGram( target, showValue ){
+    var usr = '39666111',
+        tkn = usr + '.1fb234f.c3901000b4944a549fd5fd2310c63780',
+        tgt = '#' + target;
     
-  //   if ( $(tgt).length > 0 ){
-  //     $(tgt).pongstgrm({
-  //       accessId    : usr,
-  //       accessToken : tkn,
-  //       show        : target,
-  //       count       : showValue,
-  //       pager       : true
-  //     });
-  //   }
+    if ( $(tgt).length > 0 ){
+      $(tgt).pongstgrm({
+        accessId    : usr,
+        accessToken : tkn,
+        show        : target,
+        count       : showValue,
+        pager       : true
+      });
+    }
     
-  //   $('[data-paginate="' + target + '"]')
-  //     .removeClass('btn-success')
-  //     .addClass('btn-danger text-center');
-  // }
+    $('[data-paginate="' + target + '"]')
+      .removeClass('btn-success')
+      .addClass('btn-danger text-center');
+  }
   
-  // loadGram( 'recent', 8 );
+  loadGram( 'recent', 8 );
   // loadGram( 'liked',  8 );
   // loadGram( 'feed',   8 );
 

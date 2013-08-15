@@ -35,7 +35,7 @@
 
     a:hover,a:active,a:visited { text-decoration:none; }  
 
-    [role=main] { padding-top:40px; padding-bottom:40px; } 
+    [role=main] { padding-top:20px; padding-bottom:40px; } 
 
     header { min-height: 150px; margin-top:0; margin-bottom:20px; padding:10px; background:url({{site.baseurl}}/assets/img/img.jpg) top center fixed no-repeat; background-size:cover; font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif; }  
     header a { color:#fff; font-size:52px; text-decoration:none!important; text-shadow:0 1px 1px #333; -webkit-transition:color 100ms linear; -moz-transition:color 100ms linear; -o-transition:color 100ms linear; transition:color 100ms linear; }  
@@ -45,7 +45,25 @@
     header [class*=col-]:last-child { margin-top:28px; text-align:right; }
     header .btn {-webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0; -o-border-radius: 0; border-radius: 0;}
     header .btn.btn-success { background-color:#1f7f5c; border-color: #1f7f5c; font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif; font-weight: 300; }
-    header .btn.btn-success:hover {background-color:#24936b;}
+    header .btn.btn-success:hover {background-color:#24936b; }
+    
+    .thumbnails .thumbnail {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .thumbnails .thumbnail img {
+      width: 100%;
+      height: auto;
+    }
+    
+    @media ( max-width: 768px ){
+      header > .container > .row > div { text-align: center; }
+      [role="main"] {padding-left: 20px; padding-right: 20px;}
+    }
+    
+    @media ( max-width: 768px ){
+      
+    }
   </style>
   
 </head>
@@ -64,9 +82,18 @@
 
   <!-- CONTENT -->
   <div role="main">
-  
-  {{ content }}
-  
+    
+    <div class="container">
+    
+      <div class="row">
+        <div class="col-xs-12 alert">
+          <i class="icon-warning-sign"></i> <strong>Heads Up!</strong> The example below uses <a href="#">Bootstrap 3</a> default styling.
+        </div>
+      </div>
+      
+      {{ content }}
+    </div><!-- end of .container -->  
+    
   </div><!-- end of [role="main"] -->
   
   <!-- FOOTER -->

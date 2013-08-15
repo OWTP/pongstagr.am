@@ -9,23 +9,26 @@
  * ========================================================================= */
 
 ;(function ($, window, document, undefined){ "use strict";
-    
-  function renderHTML( targetElement, request, pager ){
-    var galleryList      = '<ul class="thumbnails"></ul>',
-        galleryContainer = '<div class="row-fluid">' + galleryList + '</div>',
-        paginateTarget   = $(targetElement).attr('id'),
-        paginateBtn      = '<div class="row-fluid"><a href="javascript:void(0);" data-paginate="'+ paginateTarget +'" class="span4 offset4 btn btn-large btn-block btn-success">Load More</a></div>';
 
-    $( targetElement ).append( galleryContainer ); 
+  // Prep the target element to be loaded with media
+  // ===============================================
+  function renderHTML( targetElement, request, pager ){
+    var galleryList      = '<div class="row thumbnails"></div>',
+        paginateTarget   = $(targetElement).attr('id'),
+        paginateBtn      = '<div class="row"><a href="javascript:void(0);" data-paginate="'+ paginateTarget +'" class="col-xs-12 col-sm-12 col-md-6 col-lg-6 btn btn-large btn-block btn-success">Load More</a></div>';
+
+    $( targetElement ).append( galleryList ); 
     
     if ( pager === null || pager === true ){
       $( targetElement ).after( paginateBtn );
     }      
   }
   
+  // Render Modal Window
+  // ============================================
   function renderModal( imageOwner, imageId, imageTitle, imageUrl, imgUser ){
 
-    var modal  = '<div id="' + imageId + '" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+    var modal  = '<div id="' + imageId + '" class="modal hide fade">';
         modal += '<div class="modal-header">';
         modal += '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
         modal += '</div><!-- end of .modal-header -->';
@@ -52,11 +55,13 @@
     $('body').append( modal ); //*! Append modal window to body 
     
     $('#' + imageId ).on('hidden', function(){
-      $(this).remove(); //*! completely remove modal
+      $(this).remove();   //*! completely remove modal
       $('body').removeAttr('style');
     });
   }
 
+  // Image Preloader, display spinner while image loads
+  // ============================================
   function imagePreLoader( imageId ){
     var $image    = $( imageId ),
          spinner  = imageId + '-ldr',
@@ -71,6 +76,8 @@
     });
   }
 
+  // Ajax Data and Photostream variables
+  // ============================================
   function ajaxRequest( endpoint, targetElement ){
     $.ajax({
       method   : "GET"    ,
@@ -92,14 +99,14 @@
               imgUser    = value.user.profile_picture,
               imageOwner = value.user.username;
                             
-          var thumbBlock  = '<li class="span3">';
+          var thumbBlock  = '<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">';
               thumbBlock += '<div class="thumbnail">';
               thumbBlock += '<div id="'+ imageId +'-thmb-ldr" class="loader"></div>';
               thumbBlock += '<a href="#" class="btn btn-mini btn-info btn-likes"><i class="icon-heart icon-white"></i> &nbsp;' + likes + '</a>';
               thumbBlock += '<a href="#" class="btn btn-mini btn-info btn-comments"><i class="icon-comment icon-white"></i> &nbsp;' + comments + '</a>';
               thumbBlock += '<a href="#" role="button" data-toggle="modal" data-reveal-id="' + imageId + '"><img src="' + thumbnail + '" alt="' + imgCaption + '" id="' + value.id + '-thmb" /></a>';
               thumbBlock += '</div>';
-              thumbBlock += '</li>';
+              thumbBlock += '</div>';
           
           // Inject Thumbnaisl to container              
           $( injectTo + ' .thumbnails' ).append( thumbBlock );
@@ -133,7 +140,10 @@
       }
     });
   }
-
+  
+  
+  // Paginate
+  // ============================================
   function paginate( nextUrl, targetElement ){
     
     var pagBtn = $(targetElement).attr('id');
@@ -153,7 +163,10 @@
       });
     }
   }
-  
+
+
+  // Data Request
+  // ============================================
   function requestData ( request, count, accessID, accessToken, targetElement, pager ){
     var $apiRequest   = 'https://api.instagram.com/v1/users/',  
         $requestCount = ( count !== null ) ?  
@@ -180,31 +193,48 @@
     }
         
     renderHTML( targetElement, loadBtnData, pager );
-  }
+  }  
+  
 
-  function accessDetails( accessID, accessToken ){
-    if ( accessID !== null || accessToken !== null ) {
+  // Access Details
+  // ============================================
+  function accessDetails (accessID, accessToken) {
+    
+    if (accessID !== null || accessToken !== null) {
+        
         return true;
+      
       } else {
+      
           console.log('Please check whether your Access ID and Access Token if it\'s valid.' );
+      
           console.log('You may visit http://instagram.com/developer/authentication/ for more info.');
+      
         return false;
     }
+    
   }
+  
 
-  $.fn.pongstgrm = function( options ){
+  $.fn.pongstgrm = function (options) {
         
     // Plugin Options
     var option  = $.extend({}, $.fn.pongstgrm.defaults, options);
     
     return this.each( function(i, element){
+      
       if ( accessDetails( option.accessId, option.accessToken ) !== false ){
+      
         requestData( option.show, option.count, option.accessId, option.accessToken, element, option.pager );
+      
       }
+    
     });  //*! end return this.each;
   };     //*! end $.fn.pongstagrm;
-   
+    
+  
   // Pongstagram Default Options
+  // ============================================
   $.fn.pongstgrm.defaults = {
 
     // User Authentication
@@ -218,5 +248,5 @@
     pager        : null   // boolean, options:  true or false (enables/disable load more button)
     
   };
-   
- })(jQuery, window, document);
+  
+})(jQuery, window, document);
