@@ -38,6 +38,7 @@ body {
   font-family: $font-family-sans-serif;
   font-weight: 400;
   background: url("../img/img.jpg") top center fixed no-repeat;
+  background-attachment: fixed;
   background-size: cover;
 }
 
@@ -150,15 +151,32 @@ code {
 }
 
 #sidebar {
-  .sticky .btn { text-align: left; }
+
   a.active {
+    text-shadow: 0 1px 1px darken($brand-danger,5%);
     background: $brand-danger;
     border: 1px solid darken($brand-danger,1%);
     @include box-shadow(none);
   }
+ 
+  .main-btn .btn { text-align: left; }
+  
+  .substitute-btn { padding-bottom: 25px; }
+  .substitute-btn.stick {
+    @include transition(position 500ms linear);
+    @include transition(background-color 500ms linear);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    z-index: $zindex-modal + 10;
+    background-color: rgba(#000,0.95);
+    
+    .btn:first-child { @include border-left-radius(2px); }
+    .btn:last-child { @include border-right-radius(2px); }
+  }
 }
-
-
 
 
 
@@ -192,27 +210,20 @@ code {
 // page styles for smaller screens
 // ============================================================================
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   
   body { padding: 0; }
   
   header {
-    [class*="span"] {
+    [class*="col-"] {
       &:first-child { text-align: center; }
       &:last-child  { text-align: center; }
     }
   }
   
   [role="main"] { padding: 10px; }
-  
-  .sticky {
-    opacity: 0;
-    @include transition(all 150ms linear);
-  }
+
 }
-
-
-
 
 @import "buttons";
 // @import "modals";

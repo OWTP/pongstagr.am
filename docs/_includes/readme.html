@@ -20,9 +20,11 @@
     <li>Bootstrap JS, actually Bootstrap Modal and its dependancies.</li>
   </ol>
 
+  {% comment %}
   <p>
     or you can head over here to use the <a href="plugin-only"><strong>plugin-only version</strong></a> (one that doesn't rely on Bootstrap Front-end).
   </p>
+  {% endcomment %}
 
         <h3><strong>usage:</strong></h3>
 
@@ -68,14 +70,14 @@
             
 <pre>
 &lt;script&gt;</span>
-  $(<span class="value">document</span>)</span>.<span class="attr">ready</span>(<span class="attr">function</span>(){
+$(<span class="value">document</span>)</span>.<span class="attr">ready</span>(<span class="attr">function</span>(){
 
-      $(<span class="value">'div#selector'</span>).<span class="attr">pongstgrm</span>({
-        accessId    : <span class="pair">YourAccessID</span>,
-        accessToken : <span class="pair">YourAccessToken</span>
-      });
-  
-  });  
+  $(<span class="value">'div#selector'</span>).<span class="attr">pongstgrm</span>({
+    accessId    : <span class="pair">YourAccessID</span>,
+    accessToken : <span class="pair">YourAccessToken</span>
+  });
+
+});  
 <span class="tag">&lt;/script&gt;</span>
 </pre>
 
@@ -89,7 +91,24 @@
         <br />
   <h2>Other Options</h2>
 <pre>
-show   : <span class="pair">null</span>, <span class="comment">// string,  options: 'recent', 'feed', 'liked', 'user'</span>
-count  : <span class="pair">null</span>, <span class="comment">// integer, options: 1(min) - 40(max), instagram limits the maximum number of photos to 40</span>
-pager  : <span class="pair">null</span>  <span class="comment">// boolean, options:  true or false (enables/disable load more button)</span>
+<span class="comment">// string,  options: 'recent', 'feed', 'liked', 'user'</span>
+show       : <span class="pair">null</span>,
+
+<span class="comment">// boolean, options: true or false (shows/hide your instagram profile info)</span>
+profile    : <span class="pair">null</span>, 
+
+<span class="comment">// string,  options: '#profile-container' selector where you want your profile to be loaded</span>
+profilediv : <span class="pair">null</span>, 
+
+<span class="comment">// integer, options: 1(min) - 40(max), instagram limits the maximum number of photos to 40</span>
+count      : <span class="pair">null</span>, 
+
+<span class="comment">// boolean, options:  true or false (enables/disable load more button)</span>
+pager      : <span class="pair">null</span>
+
+<span class="comment">// boolean, options: true or false (enable/disable like icon and count)</span>
+likes      : <span class="pair">null</span>,
+
+<span class="comment">// boolean, options: true or false (enable/disable comments icon and count)</span>
+comments   : <span class="pair">null</span>
 </pre>

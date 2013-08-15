@@ -8,7 +8,7 @@
   color: inherit;
   text-shadow: 0 1px 1px #fff;
   background-color: #fff;
-  border: 1px solid $gray-light;
+  border-color: $gray-light;
   
   &:hover,
   &:active {
@@ -16,7 +16,7 @@
     @include box-shadow(none);
     color: inherit;
     background: darken($gray-lighter,5%);
-    border: 1px solid darken($gray-light,5%);
+    border-color: darken($gray-light,5%);
   }
   
   // Button Colors
@@ -30,7 +30,7 @@
     &:active {
       @include box-shadow(none);
       background: lighten($brand-primary,5%);
-      border: 1px solid lighten($brand-primary,5%);
+      border-color: lighten($brand-primary,5%);
     }
   }
   
@@ -43,7 +43,7 @@
     &:active {
       @include box-shadow(none);
       background: lighten($brand-info,5%);
-      border: 1px solid lighten($brand-info,5%);
+      border-color: lighten($brand-info,5%);
     }
   }
   
@@ -56,7 +56,7 @@
     &:active {
       @include box-shadow(none);
       background: lighten($brand-success,5%);
-      border: 1px solid lighten($brand-success,5%);
+      border-color: lighten($brand-success,5%);
     }
   }
   
@@ -78,17 +78,6 @@
   //   &:active {
   //     background: lighten($btnDangerBackground,5%);
   //     border: 1px solid lighten($btnDangerBackground,5%);
-  //     @include box-shadow(none);
-  //   }
-  // }
-  
-  // &.btn-inverse {
-  //   background: $btnInverseBackground;
-  //   border: 1px solid $btnInverseBackground;    
-  //   &:hover,
-  //   &:active {
-  //     background: lighten($btnInverseBackground,5%);
-  //     border: 1px solid lighten($btnInverseBackground,5%);
   //     @include box-shadow(none);
   //   }
   // }
@@ -135,4 +124,3 @@
   // }
   
 }
-

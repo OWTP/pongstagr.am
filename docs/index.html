@@ -6,30 +6,8 @@ title: Home
   <div class="container">
     <div class="row">
 
-      <div id="sidebar" class="col-xs col-sm-12 col-md-3 col-lg-3">
-        <div class="substitute-btn text-center visible-xs">
-          <a href="#readme" class="btn btn-info btn-lg" title="View Read Me">
-            <i class="icon-book"></i>
-          </a>
-          
-          <a href="#examples" class="btn btn-info btn-lg" title="View Examples">
-            <i class="icon-beaker"></i>
-          </a>
-
-          <a href="#acknowlegements" class="btn btn-info btn-lg" title="View Acknowledgements">
-            <i class="icon-thumbs-up"></i>
-          </a>
-
-          <a href="#license" class="btn btn-info btn-lg" title="View License">
-            <i class="icon-file-text-alt"></i>
-          </a>
-
-          <a href="#comments" class="btn btn-info btn-lg" title="View Comments">
-            <i class="icon-comments"></i>
-          </a>
-        </div>
-        
-        <div class="sticky ">
+      <div id="sidebar" class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
+        <div class="main-btn col-xs visible-lg sticky">          
           <a href="#readme" class="btn btn-info btn-lg btn-block">
             <i class="icon-book"></i>
             &nbsp; Documentation
@@ -49,34 +27,58 @@ title: Home
           <a href="#comments" class="btn btn-info btn-lg btn-block">
             <i class="icon-comments"></i>
             &nbsp; Comments
-          </a>
+          </a>          
         </div><!-- end of .sticky -->
-      </div><!-- end of #sidebar.span3 -->
+
+        <div class="substitute-btn text-center hidden-lg">
+          <div class="btn-group">
+            <a href="#readme" class="btn btn-info btn-lg" title="View Read Me" data-placement="bottom" data-placement="bottom">
+              <i class="icon-book"></i>
+            </a>
+            
+            <a href="#examples" class="btn btn-info btn-lg" title="View Examples" data-placement="bottom">
+              <i class="icon-beaker"></i>
+            </a>
+
+            <a href="#acknowlegements" class="btn btn-info btn-lg" title="View Acknowledgements" data-placement="bottom">
+              <i class="icon-thumbs-up"></i>
+            </a>
+
+            <a href="#license" class="btn btn-info btn-lg" title="View License" data-placement="bottom">
+              <i class="icon-file-text-alt"></i>
+            </a>
+
+            <a href="#comments" class="btn btn-info btn-lg" title="View Comments" data-placement="bottom">
+              <i class="icon-comments"></i>
+            </a>
+          </div>
+        </div><!-- end .btn-group -->
+      </div><!-- end of #sidebar -->
       
       
-      <div id="index" class="col-xs col-sm-12 col-lg-9">
+      <article id="index" class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
       
-        <div id="readme" class="docs">
+        <section id="readme" class="docs">
           {% include readme.html %}
-        </div>
+        </section>
         
-        <div id="examples" class="docs">
+        <section id="examples" class="docs">
           {% include examples.html %}
-        </div>
+        </section>
         
-        <div id="acknowlegements" class="docs">
+        <section id="acknowlegements" class="docs">
           {% include acknowlegements.html %}
-        </div>
+        </section>
         
-        <div id="license" class="docs">
+        <section id="license" class="docs">
           {% include license.html %}
-        </div>
+        </section>
         
-        <div id="comments" class="docs">
-          {% include disqus-thread.html %}
-        </div>
+        <section id="comments" class="docs">
+          <!-- {% include disqus-thread.html %} -->
+        </section>
         
-      </div><!-- end of #index.span9 -->
+      </article><!-- end of #index.span9 -->
       
     </div><!-- end of .row-fluid -->
   </div><!-- end of .container -->

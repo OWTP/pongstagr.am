@@ -9,8 +9,9 @@ Pongstagr.am is a jquery plugin that lets you display your instagram media to yo
 
 #### Plugin Requirements
 
-1. jQuery 1.8+
-2. bootstrap-modal.js (or bootstrap.js || bootstrap.min.js )
+1. Instagram account, User ID and Access Token.
+2. jQuery 1.10.2 (or jQuery 1.9.1 will also do).
+3. Bootstrap JS, actually Bootstrap Modal and its dependancies.
 
 
 ---------
@@ -50,8 +51,12 @@ $('div#selector').pongstgrm({
   
 ```javascript
 show       : null,    // string,  options: 'recent', 'feed', 'liked', 'user'
+profile    : null,    // boolean, options: true or false (shows/hide your instagram profile info)
+profilediv : null,    // string,  options: '#profile-container' selector where you want your profile to be loaded
 count      : null,    // integer, options: 1(min) - 40(max), instagram limits the maximum number of photos to 40
-pager      : null     // boolean, options:  true or false (enables/disable load more button)
+pager      : null,    // boolean, options: true or false (enables/disable load more button)
+likes      : null,    // boolean, options: true or false (enable/disable like icon and count)
+comments   : null     // boolean, options: true or false (enable/disable comments icon and count)
 ```
 
 
@@ -59,23 +64,25 @@ pager      : null     // boolean, options:  true or false (enables/disable load 
 
 #### Usage Example:
 
-```javascript
-<script src='//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
-<script src='path/to/js/bootstrap-modal.js'></script>  
+```html
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+<script src='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js'></script>
 <script src='path/to/js/pongstagr.am.js'></script>
 
 <script>
-  $(document).ready(function(){
-    
-    $('selector').pongstgrm({
-      accessId    : YourAccessID,
-      accessToken : YourAccessToken,
-      show        : 'liked',
-      count       : 8,
-      pager       : true
-    });
-    
+$(document).ready(function(){
+  
+  $('selector').pongstgrm({
+    accessId    : YourAccessID,
+    accessToken : YourAccessToken,
+    show        : 'liked',
+    count       : 8,
+    pager       : true,
+    likes       : true,
+    comments    : true
   });
+  
+});
 </script>
 ```
 
@@ -83,9 +90,10 @@ pager      : null     // boolean, options:  true or false (enables/disable load 
 
 #### Acknowledgements 
   
-  - **[Bootstrap](http://twitter.github.io/bootstrap/)** is created by [@mdo](http://twitter.com/mdo) & [@fat](http://twitter.com/fat)
-  - **[Bootstrap-Sass]()**
-  - **[Font Awesome]()**
+  - **[Bootstrap](http://twitter.github.io/bootstrap/)** is created by [@mdo](http://twitter.com/mdo) &amp; [@fat](http://twitter.com/fat)
+  - **[Bootstrap-Sass](https://github.com/thomas-mcdonald/bootstrap-sass)** is created by [Thomas McDonald](https://github.com/thomas-mcdonald)
+  - **[Font Awesome](http://fontawesome.io/)** is created and maintain by [@davegandy](http://twitter.com/davegandy)
+
 ---------
 
 **License:**
@@ -93,7 +101,7 @@ pager      : null     // boolean, options:  true or false (enables/disable load 
 Free to use, Code license under [Apache v2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
 ```
-Copyright 2013 &copy; Pongstr Ordillo
+Copyright 2013 (c) Pongstr Ordillo
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
