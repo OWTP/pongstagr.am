@@ -9,22 +9,21 @@
  * ========================================================================= */
 
 $(window).load(function(){ "use strict";
+  
+  // Make example code pretty
+  if ( $('.prettyprint').length > 0 ) {
+    window.prettyPrint && prettyPrint();
+  }
 
   /* Sticky Menu
    * ============================================ */
     var headerHeight = $('header').outerHeight();
-
-    // Sticky Menu for large screens
-    $('.sticky').affix({offset: { top: -100 } });
    
     $(window).scroll(function(){
       //if scrolled down more than the header's height
       if ($(window).scrollTop() > headerHeight ){
-
-          $('.substitute-btn').addClass('stick');
-          
+          $('.substitute-btn').addClass('stick');          
         } else {
-          
           $('.substitute-btn').removeClass('stick');
       }
     });   
@@ -83,29 +82,37 @@ $(window).load(function(){ "use strict";
    * showValue is the number of media you would like to show i.e., 8
    *
    */
-  function loadGram( target, showValue ){
-    var usr = '39666111',
-        tkn = usr + '.1fb234f.c3901000b4944a549fd5fd2310c63780',
-        tgt = '#' + target;
+  // function loadGram( target, showValue ){
+  //   var usr = '39666111',
+  //       tkn = usr + '.1fb234f.c3901000b4944a549fd5fd2310c63780',
+  //       tgt = '#' + target;
     
-    if ( $(tgt).length > 0 ){
-      $(tgt).pongstgrm({
-        accessId    : usr,
-        accessToken : tkn,
-        show        : target,
-        count       : showValue,
-        pager       : true
-      });
-    }
+  //   if ( $(tgt).length > 0 ){
+  //     $(tgt).pongstgrm({
+  //       accessId    : usr,
+  //       accessToken : tkn,
+  //       show        : target,
+  //       count       : showValue,
+  //       pager       : true
+  //     });
+  //   }
     
-    $('[data-paginate="' + target + '"]')
-      .removeClass('btn-success')
-      .addClass('btn-danger text-center');
-  }
+  //   $('[data-paginate="' + target + '"]')
+  //     .removeClass('btn-success')
+  //     .addClass('btn-danger text-center');
+  // }
   
-  loadGram( 'recent', 8 );
+  // loadGram( 'recent', 4 );
   // loadGram( 'liked',  8 );
   // loadGram( 'feed',   8 );
+
+    var usr = '39666111',
+        tkn = usr + '.1fb234f.c3901000b4944a549fd5fd2310c63780';
+
+    $('#recent').pongstgrm({
+      accessId: usr,
+      accessToken: tkn
+    });
 
 }); /*! end window.load */
 
@@ -114,7 +121,7 @@ $(window).load(function(){ "use strict";
 // =============================================
 
 if (navigator.userAgent.match( /(iPod|iPhone|iPad)/ )) { 
-  window.addEventListener("load",function() { "use strict";
+  window.addEventListener( 'load', function() {
     setTimeout( function() { window.scrollTo(0, 0); }, 0);
   });
 }

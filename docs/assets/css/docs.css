@@ -8,10 +8,6 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  * Requires: jQuery v1.10.1 and Bootstrap 3.0
  * ========================================================================= */
-*:focus {
-  outline: 0 none;
-}
-
 html,
 body {
   min-height: 100%;
@@ -55,22 +51,22 @@ header small {
   line-height: 1.6;
 }
 header a {
+  -webkit-transition: color 100ms linear;
+  -moz-transition: color 100ms linear;
+  -o-transition: color 100ms linear;
+  transition: color 100ms linear;
   color: #fff;
   font-size: 52px;
   text-decoration: none !important;
   text-shadow: 0 1px 1px #333333;
-  -webkit-transition: color 100ms linear;
-  -moz-transition: color 100ms linear;
-  -o-transition: color 100ms linear;
-  transition: color 100ms linear;
 }
 header a:hover, header a:active, header a:focus {
-  color: #d9534f;
-  outline: 0 none !important;
   -webkit-transition: color 100ms linear;
   -moz-transition: color 100ms linear;
   -o-transition: color 100ms linear;
   transition: color 100ms linear;
+  color: #d9534f;
+  outline: 0 none !important;
 }
 header [class*="col-"]:last-child {
   margin-top: 28px;
@@ -110,40 +106,83 @@ header [class*="col-"]:last-child {
 
 pre,
 code {
+  -webkit-box-shadow: 0 0 4px #202020 inset;
+  -moz-box-shadow: 0 0 4px #202020 inset;
+  box-shadow: 0 0 4px #202020 inset;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
   overflow-x: auto;
-  font-size: 12px !important;
+  font-size: 11px !important;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  line-height: 1.7;
   color: #999999;
-  background: #222222;
+  background: rgba(34, 34, 34, 0.55);
   border: 1px solid #222222;
-  -webkit-box-shadow: 0 0 6px #1d1d1d inset;
-  -moz-box-shadow: 0 0 6px #1d1d1d inset;
-  box-shadow: 0 0 6px #1d1d1d inset;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
 }
-pre .attr,
-code .attr {
-  color: #d9534f;
+
+pre.prettyprint {
+  padding: 10px;
 }
-pre .value,
-code .value {
-  color: #428bca;
+
+.pun,
+.opn,
+.clo {
+  color: #93a1a1;
 }
-pre .key,
-code .key {
+
+.fun {
+  color: #dc322f;
+}
+
+.kwd,
+.prettyprint
+.tag {
   color: #c7254e;
 }
-pre .pair,
-code .pair {
+
+.str,
+.atv {
+  color: #428bca;
+}
+
+.typ,
+.atn,
+.dec,
+.var {
   color: #97ff03;
 }
-pre .comment,
-code .comment {
+
+.lit {
+  color: #195f91;
+}
+
+.pln {
+  color: #eeeeee;
+}
+
+.com {
+  color: #999999;
   font-style: italic;
-  color: #555555;
+}
+
+.prettyprint {
+  padding: 8px;
+}
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+  margin: 0 0 0 33px;
+  /* IE indents via margin-left */
+}
+
+ol.linenums li {
+  padding-left: 12px;
+  color: #bebec5;
+  line-height: 20px;
+  text-shadow: 0 1px 0 #fff;
 }
 
 #sidebar a.active {
@@ -192,6 +231,10 @@ code .comment {
   -moz-border-radius-bottomright: 2px;
   -webkit-border-bottom-right-radius: 2px;
   border-bottom-right-radius: 2px;
+}
+
+*:focus {
+  outline: 0 none !important;
 }
 
 @media (max-width: 768px) {

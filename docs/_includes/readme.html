@@ -26,7 +26,7 @@
   </p>
   {% endcomment %}
 
-        <h3><strong>usage:</strong></h3>
+        <h3><strong>Usage:</strong></h3>
 
         <ol>
           <li>
@@ -49,16 +49,16 @@
               initialised before you call on the plugin.
             </p>
             
-<pre>
-<span class="comment">&lt;!-- Include stylesheets to header --&gt;</span>
-<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css"</span> <span class="tag">/&gt;</span>
-<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"</span> <span class="tag">/&gt;</span>
-<span class="tag">&lt;link</span> <span class="attr">rel=</span><span class="value">"stylesheet"</span> <span class="attr">href=</span><span class="value">"/path/to/css/pongstagr.am.css"</span> <span class="tag">/&gt;</span>
+<pre class="prettyprint">
+&lt;!-- Include stylesheets to header --&gt;</span>
+&lt;link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"&gt;
+&lt;link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"&gt;
+&lt;link rel="stylesheet" href="/path/to/css/pongstagr.am.css"&gt;
 
-<span class="comment">&lt;!-- Include Javascripts to footer --&gt;</span>
-&lt;script</span> <span class="attr">href=</span><span class="value">"//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
-&lt;script</span> <span class="attr">href=</span><span class="value">"//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
-&lt;script</span> <span class="attr">href=</span><span class="value">"/path/to/js/pongstagr.am.js"</span> <span class="tag">/&gt;</span><span class="tag">&lt;/script&gt;</span>
+&lt;!-- Include Javascripts to footer --&gt;
+&lt;script href="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" /&gt;&lt;/script&gt;
+&lt;script href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"/&gt;&lt;/script&gt;
+&lt;script href="/path/to/js/pongstagr.am.js" /&gt;&lt;/script&gt;
 </pre>
 
             <p class="text-muted">
@@ -68,17 +68,17 @@
               <strong>then call on the plugin like this: </strong>
             </p>
             
-<pre>
-&lt;script&gt;</span>
-$(<span class="value">document</span>)</span>.<span class="attr">ready</span>(<span class="attr">function</span>(){
+<pre class="prettyprint">
+&lt;script&gt;
+$(document).ready(function () {
 
-  $(<span class="value">'div#selector'</span>).<span class="attr">pongstgrm</span>({
-    accessId    : <span class="pair">YourAccessID</span>,
-    accessToken : <span class="pair">YourAccessToken</span>
+  $('div#selector').pongstgrm({
+    accessId    : YourAccessID,
+    accessToken : YourAccessToken
   });
 
 });  
-<span class="tag">&lt;/script&gt;</span>
+&lt;/script&gt;
 </pre>
 
             <p>
@@ -90,25 +90,12 @@ $(<span class="value">document</span>)</span>.<span class="attr">ready</span>(<s
         
         <br />
   <h2>Other Options</h2>
-<pre>
-<span class="comment">// string,  options: 'recent', 'feed', 'liked', 'user'</span>
-show       : <span class="pair">null</span>,
-
-<span class="comment">// boolean, options: true or false (shows/hide your instagram profile info)</span>
-profile    : <span class="pair">null</span>, 
-
-<span class="comment">// string,  options: '#profile-container' selector where you want your profile to be loaded</span>
-profilediv : <span class="pair">null</span>, 
-
-<span class="comment">// integer, options: 1(min) - 40(max), instagram limits the maximum number of photos to 40</span>
-count      : <span class="pair">null</span>, 
-
-<span class="comment">// boolean, options:  true or false (enables/disable load more button)</span>
-pager      : <span class="pair">null</span>
-
-<span class="comment">// boolean, options: true or false (enable/disable like icon and count)</span>
-likes      : <span class="pair">null</span>,
-
-<span class="comment">// boolean, options: true or false (enable/disable comments icon and count)</span>
-comments   : <span class="pair">null</span>
+<pre class="prettyprint">
+show       : null, // string,  options: 'recent', 'feed', 'liked', 'user'
+profile    : null, // boolean, options: true or false (shows/hide your instagram profile info)
+profilediv : null, // string,  options: '#profile-container' selector where you want your profile to be loaded
+count      : null, // integer, options: 1(min) - 40(max), instagram limits the maximum number of photos to 40
+pager      : null, // boolean, options:  true or false (enables/disable load more button)
+likes      : null, // boolean, options: true or false (enable/disable like icon and count)
+comments   : null  // boolean, options: true or false (enable/disable comments icon and count)
 </pre>

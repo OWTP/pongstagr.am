@@ -28,8 +28,6 @@
 // Body
 // --------------------------
 
-*:focus { outline: 0 none; }  // remove outline on all focused elements.
-
 html,
 body { min-height: 100%; }
 
@@ -77,18 +75,18 @@ header {
   }
   
   a { 
+    @include transition(color 100ms linear);
     color: #fff;
     font-size: 52px;
     text-decoration: none !important;
     text-shadow: 0 1px 1px $gray-dark;
-    @include transition(color 100ms linear);
 
     &:hover,
     &:active,
     &:focus {
+      @include transition(color 100ms linear);
       color: $brand-danger;
       outline: 0 none !important;
-      @include transition(color 100ms linear);
     }
   }
   
@@ -132,22 +130,55 @@ header {
 
 pre,
 code {
+  @include box-shadow(0 0 4px darken($gray-darker,1%) inset);
+  @include border-radius(4px);
   overflow-x: auto;
-  font-size: 12px !important;
+  font-size: 11px !important;
+  text-shadow: 0 1px 1px rgba(#000,0.25);
+  line-height: 1.7;
   color: $gray-light;
-  background: $gray-darker;
+  background: rgba($gray-darker,0.55);
   border: 1px solid $gray-darker;
-  @include box-shadow(0 0 6px darken($gray-darker,2%) inset);
-  @include border-radius(2px);
-  
-  .attr { color: $brand-danger; }
-  .value { color: $brand-primary; }
-  .key { color: $code-color; }
-  .pair  { color: #97ff03; }
-  .comment { 
-    font-style: italic;
-    color: $gray;
-   }
+}
+
+pre.prettyprint { padding: 10px; }
+
+.pun, 
+.opn, 
+.clo { color: #93a1a1; }
+.fun { color: #dc322f; }
+
+.kwd, 
+.prettyprint 
+.tag { color: $code-color; }
+
+.str, 
+.atv { color: $brand-primary; }
+
+.typ, 
+.atn, 
+.dec, 
+.var { color: #97ff03; }
+
+.lit { color: #195f91; }
+.pln { color: $gray-lighter; }
+.com { 
+  color: $gray-light;
+  font-style: italic;
+}
+
+
+
+.prettyprint { padding: 8px; }
+
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums { margin: 0 0 0 33px; /* IE indents via margin-left */ }
+ol.linenums li {
+  padding-left: 12px;
+  color: #bebec5;
+  line-height: 20px;
+  text-shadow: 0 1px 0 #fff;
 }
 
 #sidebar {
@@ -178,6 +209,7 @@ code {
   }
 }
 
+*:focus { outline: 0 none !important; }  // remove outline on all focused elements.
 
 
 
