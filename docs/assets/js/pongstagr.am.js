@@ -8,37 +8,7 @@
  * Requires: jQuery v1.10.1 and Bootstrap 3.0
  * ========================================================================= */
 
-
-/* jshint undef: true, unused: true */
 ;(function ($, window, document, undefined){ "use strict";
-
-  var photostream = function (element, options) {
-    
-    this.$this.element = $(element),
-    this.options = options;
-    
-  };
-  
-
-
-
-
-  photostream.prototype.access = function (id, token) {
-    
-    if ( id !== null || token !== null ){
-      
-      return true;
-      console.log(id)
-      
-    } else {
-      
-      console.log('Please check whether your Access ID and Access Token if it\'s valid.' );
-      console.log('You may visit http://instagram.com/developer/authentication/ for more info.');  
-      
-      return false;
-    }
-    
-  };
   
 
   // PONGSTAGR.AM PLUGIN DEFINITON
@@ -48,15 +18,11 @@
       , options = $.extend({}, $.fn.pongstgrm.defaults, option);
     
     
-    return this.each( function (i, element) {
-      
-      photostream.prototype.access( options.accessId, options.accessToken );  
-      
-    });
+    return this.each( function (i, element) {});
   };  
   
-  // PONGSTAGR.AM OPTIONS
-  // =====================  
+  // PONGSTAGR.AM DEFAULT OPTIONS
+  // ============================  
   $.fn.pongstgrm.defaults = {
   
     // USER AUTHENTICATION
