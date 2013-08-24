@@ -25,7 +25,6 @@
   <!-- Bootstrap3-rc2 Stylesheet -->
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-  <link href="{{ site.baseurl }}/assets/css/pongstagr.am.css" rel="stylesheet">
   <style type="text/css">
     @import url("http://fonts.googleapis.com/css?family=Lato:300,400,700");
 
@@ -38,7 +37,7 @@
 
     [role=main] { padding-top:20px; padding-bottom:40px; } 
 
-    header { min-height: 150px; margin-top:0; margin-bottom:20px; padding:10px; background:url({{site.baseurl}}/assets/img/img.jpg) center top fixed no-repeat; background-size:cover; font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif; }  
+    header { min-height: 150px; margin-top:0; margin-bottom:20px; padding:10px; -webkit-transition: color 100ms linear;-moz-transition: color 100ms linear; -o-transition: color 100ms linear; transition: color 100ms linear; background:url({{site.baseurl}}/assets/img/img.jpg) center top fixed no-repeat; background-size:cover; font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif; }  
     header a { color:#fff; font-size:52px; text-decoration:none!important; text-shadow:0 1px 1px #333; -webkit-transition:color 100ms linear; -moz-transition:color 100ms linear; -o-transition:color 100ms linear; transition:color 100ms linear; }  
     header a:hover,header a:active,header a:focus { color:#d9534f; outline:0 none!important; -webkit-transition:color 100ms linear; -moz-transition:color 100ms linear; -o-transition:color 100ms linear; transition:color 100ms linear; }  
     header h1 { margin:0; font-family:Lato, "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:300; }  
@@ -47,16 +46,12 @@
     header .btn {-webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0; -o-border-radius: 0; border-radius: 0;}
     header .btn.btn-success { background-color:#1f7f5c; border-color: #1f7f5c; font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif; font-weight: 300; }
     header .btn.btn-success:hover {background-color:#24936b; }
-
     
     @media ( max-width: 768px ){
-      header {background:url({{site.baseurl}}/assets/img/img.jpg) center center fixed no-repeat;}
+      header {background:url("{{site.baseurl}}/assets/img/img.jpg") center bottom fixed no-repeat;-webkit-transition: color 100ms linear;-moz-transition: color 100ms linear; -o-transition: color 100ms linear; transition: color 100ms linear;}
       header > .container > .row > div { text-align: center; }
-      [role="main"] {padding-left: 20px; padding-right: 20px;}
-    }
-    
-    @media ( max-width: 768px ){
-      
+      header .btn {margin-top:4px;margin-bottom:4px;}
+      [role=main] {padding-left: 20px; padding-right: 20px;}
     }
   </style>
   
@@ -80,8 +75,8 @@
     <div class="container">
     
       <div class="row">
-        <div class="col-xs-12 alert">
-          <i class="icon-warning-sign"></i> <strong>Heads Up!</strong> The example below uses <a href="#">Bootstrap 3</a> default styling.
+        <div class="col-xs-12 alert alert-info">
+          <i class="icon-rocket"></i> &nbsp;This example is using <a href="//twbs.github.io/bootstrap/" class="alert-link">Bootstrap 3</a> default styles.
         </div>
       </div>
       

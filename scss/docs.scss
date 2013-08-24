@@ -1,7 +1,7 @@
 /* ==========================================================================
- * jQuery Pongstagr.am Plugin v2.0.8
+ * jQuery Pongstagr.am Plugin v2.0.8 docs.scss
  * ==========================================================================
- * Copyright 2013 (c) Pongstr Ordillo
+ * Copyright (c) 2013 Pongstr Ordillo
  *
  * Code license under Apache License v2.0
  * http://www.apache.org/licenses/LICENSE-2.0
@@ -36,7 +36,7 @@ body {
   color: #fff;
   font-family: $font-family-sans-serif;
   font-weight: 400;
-  background: url("../img/img.jpg") top center fixed no-repeat;
+  background: url("../img/img.jpg") center center fixed no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -251,6 +251,11 @@ ol.linenums li {
     [class*="col-"] {
       &:first-child { text-align: center; }
       &:last-child  { text-align: center; }
+    }
+    
+    .btn {
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
   }
   

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * jQuery Pongstagr.am Plugin v2.0.77
+ * jQuery Pongstagr.am Plugin v2.0.8
  * ==========================================================================
  * Copyright (c) 2013 Pongstr Ordillo
  *
@@ -21,6 +21,8 @@
     return this.each( function (i, element) {});
   };  
   
+  
+  
   // PONGSTAGR.AM DEFAULT OPTIONS
   // ============================  
   $.fn.pongstgrm.defaults = {
@@ -36,7 +38,7 @@
     // DISPLAY OPTIONS
     , show:         null    // options: 'recent', 'feed', 'liked', 'user'
     , count:        null    // options: 1(min) - 40(max), instagram limits the maximum number of media to 40
-    , resolution:   null    // options: 'low_resolution', 'standard_resolution'
+    , resolution:   null    // options: 'low_resolution' or 'standard_resolution'
     , pager:        null    // options: true or false (enables/disable load more button)
     , likes:        null    // options: true or false (enable/disable like count)
     , comments:     null    // options: true or false (enable/disable comment count)

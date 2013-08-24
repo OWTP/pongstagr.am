@@ -25,7 +25,7 @@ body {
   color: #fff;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
-  background: url("../img/img.jpg") top center fixed no-repeat;
+  background: url("../img/img.jpg") center center fixed no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
@@ -255,6 +255,10 @@ ol.linenums li {
   }
   header [class*="col-"]:last-child {
     text-align: center;
+  }
+  header .btn {
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 
   [role="main"] {

@@ -1,0 +1,8 @@
+{
+  "validthis": true,
+  "laxcomma" : true,
+  "laxbreak" : true,
+  "eqnull"   : true,
+  "eqeqeq"   : false,
+  "undef"    : false
+}
