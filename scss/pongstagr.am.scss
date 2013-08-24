@@ -11,3 +11,96 @@
 
 // Compass Mixins
 @import "compass/css3";
+
+
+
+.pongstagram {
+  
+  //
+  [class*="col-"] { padding: 10px; }
+    
+  //
+  .thumbnail {
+    
+    min-width:  100%;
+    min-height: 252px;
+    background-color: #fff;
+    
+    > img { 
+      @include border-radius(2px);
+      max-width: 100% !important;
+      height: auto !important;
+      cursor: pointer; 
+    }
+    
+    > .icon-play {
+      @include opacity(0.75);
+      position: absolute;
+      top: 25px;
+      right: 20px;
+      display: block;
+      width: 24px;
+      height: 24px;
+      font-size: 18px;
+      text-align: center;
+      text-shadow: 0 1px 1px rgba(#333,0.55);
+      color: #fff;
+    }
+    
+    > .spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 1;
+      display: block;
+      width: 150px;
+      height: 150px;
+      margin-top: -75px;
+      margin-left: -75px;
+      background: url("http://img.cdn.tl/loading2.gif") center center no-repeat;     
+    }
+  }
+}
+
+
+.modal {
+  
+  .modal-dialog {
+    width: 720px;
+  }
+  
+}
+
+
+.modal-body {
+  position: relative;
+  min-height: 275px;
+  padding: 0;
+  
+  > .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin-top: -75px;
+    margin-left: -75px;
+    background: url("http://img.cdn.tl/loading2.gif") center center no-repeat;     
+  }
+  
+  > img {
+    @include border-top-radius(3px);
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto; 
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    .modal-dialog { width: 98%; }
+  } 
+}

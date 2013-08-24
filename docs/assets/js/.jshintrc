@@ -1,8 +1,10 @@
 {
+  "devel"    : false,
   "validthis": true,
   "laxcomma" : true,
   "laxbreak" : true,
   "eqnull"   : true,
   "eqeqeq"   : false,
+  "jquery"   : true,
   "undef"    : false
 }

@@ -109,7 +109,7 @@ $(window).load(function(){ "use strict";
     var usr = '39666111',
         tkn = usr + '.1fb234f.c3901000b4944a549fd5fd2310c63780';
 
-    $('#recent').pongstgrm({
+    $('.recent').pongstgrm({
       accessId: usr,
       accessToken: tkn
     });
