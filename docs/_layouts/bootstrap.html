@@ -16,18 +16,17 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
 
   <!-- Apple touch icons -->
-  <link rel="shortcut icon" type="image/x-icon" href="/pongstagr.am/assets/ico/favicon.ico" />
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/pongstagr.am/assets/ico/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/pongstagr.am/assets/ico/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/pongstagr.am/assets/ico/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="/pongstagr.am/assets/ico/apple-touch-icon-57-precomposed.png">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ site.baseurl }}/assets/ico/favicon.ico" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ site.baseurl }}/assets/ico/apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ site.baseurl }}/assets/ico/apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ site.baseurl }}/assets/ico/apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="{{ site.baseurl }}/assets/ico/apple-touch-icon-57-precomposed.png">
 
-  <!-- Bootstrap3-rc2 Stylesheet -->
-  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <!-- Bootstrap3 Stylesheet -->
+  <link href="{{ site.baseurl }}/assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="{{ site.baseurl }}/assets/css/pongstagr.am.css" rel="stylesheet">
   <style type="text/css">
-    @import url("http://fonts.googleapis.com/css?family=Lato:300,400,700");
+    /*@import url("http://fonts.googleapis.com/css?family=Lato:300,400,700");*/
 
     *:focus { outline:0 none; }  
 
@@ -75,9 +74,10 @@
     
     <div class="container">
     
-      <div class="row">
-        <div class="col-xs-12 alert alert-info">
-          <i class="icon-rocket"></i> &nbsp;This example is using <a href="//twbs.github.io/bootstrap/" class="alert-link">Bootstrap 3</a> default styles.
+      <div class="row alert alert-info">
+        <div class="col-xs-12">
+            <i class="glyphicon glyphicon-info-sign"></i> &nbsp;This example is using 
+            <a href="//twbs.github.io/bootstrap/" class="alert-link">Bootstrap 3</a> default styles.
         </div>
       </div>
       
