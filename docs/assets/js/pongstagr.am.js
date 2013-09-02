@@ -14,7 +14,15 @@
   // PRIVATE METHODS
   // =============================
 
-
+  var bs = {
+      col: 'col-xs-12 col-sm-6 col-md-4 col-lg-3'
+    , tmb: 'thumbnail'
+    , img: 'img-rounded'
+    , lyk: 'glyphicon glyphicon-heart'
+    , cmt: 'glyphicon glyphicon-comment'
+  }
+  
+  
   var Pongstgrm = {
 
     defaults: {
@@ -29,8 +37,9 @@
         , likes:        null    // options: true or false (enable/disable like count)
         , comments:     null    // options: true or false (enable/disable comment count)
       
-      }    
-    
+      }
+
+
     , container: function (element,show) {
         var btn = $('<button />').attr({
             'data-paginate': show
@@ -40,7 +49,6 @@
         $(element)
           .attr('data-type', show)
           .addClass('pongstgrm row')
-          .append(btn)
         
         return
       }
@@ -88,7 +96,7 @@
       /* Ajax */
     , ajx: function (apiurl,target) {
         var self = this
-        
+                
         $.ajax({
             method   : "GET"   
           , url      : apiurl
@@ -97,9 +105,10 @@
           , success  : function(data){
             
             $.each(data.data, function (a,b) {
-              
+
             })
-            
+
+            self.more(data.pagination.next_url,target)
           }
         })
         
@@ -168,26 +177,5 @@
       }
     })
   }
-
-
-
-
-  // PONGSTAGR.AM DEFAULT OPTIONS
-  // ============================  
-  
-  // $.fn.pongstgrm.defaults = {
-  
-  //   // USER AUTHENTICATION
-  //     accessId:     null    // user id
-  //   , accessToken:  null    // acccess token
-    
-  //   // DISPLAY OPTIONS
-  //   , show:         null    // options: 'profile', 'recent', 'feed', 'liked', 'user'
-  //   , count:        null    // options: 1(min) - 40(max), instagram limits the maximum number of media to 40
-  //   , likes:        null    // options: true or false (enable/disable like count)
-  //   , comments:     null    // options: true or false (enable/disable comment count)
-  
-  // }
-
 
 }(window.jQuery);
