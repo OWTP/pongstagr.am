@@ -14,44 +14,86 @@
   // PRIVATE METHODS
   // =============================
 
-  var bs = {
-      col: 'col-xs-12 col-sm-6 col-md-4 col-lg-3'
-    , tmb: 'thumbnail'
-    , img: 'img-rounded'
-    , lyk: 'glyphicon glyphicon-heart'
-    , cmt: 'glyphicon glyphicon-comment'
-  }
-  
-  
+
   var Pongstgrm = {
 
     defaults: {
       
         // USER AUTHENTICATION
+        // ============================
           accessId:     null    // user id
         , accessToken:  null    // acccess token
-        
+
+
         // DISPLAY OPTIONS
+        // ============================
         , show:         null    // options: 'profile', 'recent', 'feed', 'liked', 'user'
         , count:        null    // options: 1(min) - 40(max), instagram limits the maximum number of media to 40
         , likes:        null    // options: true or false (enable/disable like count)
         , comments:     null    // options: true or false (enable/disable comment count)
-      
+
+
+        // BOOTSTRAP STYLES
+        // ============================
+        , col:        'col-xs-6 col-sm-6 col-md-3 col-lg-3'  // Sets thumbnail columns
+        , like:       'glyphicon glyphicon-heart'             // sets like icon
+        , video:      'glyphicon glyphicon-play'              // sets video icon
+        , comment:    'glyphicon glyphicon-comment'           // sets comments icon
+        , preload:    'spinner'                               // sets preloader class
+        , button:     'btn btn-success'
+        , buttontext: 'Load more'
+
       }
 
 
+    , html: {
+        button: function (css,show) {
+          var button = document.createElement('button')
+          var render = $(button).attr({
+              'data-paginate': show
+            , 'class': css
+          }).text( Pongstgrm.defaults.buttontext )
+          
+          return render
+        }
+      
+      , tag: function (tag,id,css) {
+        var element = document.createElement(tag)
+        
+        if (id)  { element.id = id }
+        if (css) { element.className = css }
+          
+          return element
+        }
+      
+      , image: function (id,src,cap,thumbnail) {
+          var tag   = Pongstgrm.html.tag('img',id) 
+          var image = $(tag).attr({
+              'src': src
+            , 'alt': cap
+          })
+                    
+          return image
+        }
+      
+      , thumbnail: function (child) {
+          var thumb = Pongstgrm.html.tag('div','','thumbnail')
+          var block = $(thumb).append(child)
+          
+          return block
+        }
+      }
+
     , container: function (element,show) {
-        var btn = $('<button />').attr({
-            'data-paginate': show
-          , 'class': 'btn btn-block btn-success'
-        }).text('Load more')
+        var button = this.html.button(this.defaults.button,show)
         
         $(element)
           .attr('data-type', show)
           .addClass('pongstgrm row')
+          .after(button)
         
         return
-      }
+    }
 
 
       /* Authentication */
@@ -95,20 +137,18 @@
 
       /* Ajax */
     , ajx: function (apiurl,target) {
-        var self = this
-                
         $.ajax({
-            method   : "GET"   
+            method   : 'GET'
+          , dataType : 'jsonp' 
           , url      : apiurl
           , cache    : true    
-          , dataType : "jsonp" 
           , success  : function(data){
-            
+
             $.each(data.data, function (a,b) {
 
             })
 
-            self.more(data.pagination.next_url,target)
+            Pongstgrm.more(data.pagination.next_url,target)
           }
         })
         
