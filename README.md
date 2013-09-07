@@ -51,10 +51,7 @@ $('div#selector').pongstgrm({
   
 ```javascript
 show       : null,    // string,  options: 'recent', 'feed', 'liked', 'user'
-profile    : null,    // boolean, options: true or false (shows/hide your instagram profile info)
-profilediv : null,    // string,  options: '#profile-container' selector where you want your profile to be loaded
 count      : null,    // integer, options: 1(min) - 40(max), instagram limits the maximum number of photos to 40
-pager      : null,    // boolean, options: true or false (enables/disable load more button)
 likes      : null,    // boolean, options: true or false (enable/disable like icon and count)
 comments   : null     // boolean, options: true or false (enable/disable comments icon and count)
 ```
@@ -96,9 +93,7 @@ $(document).ready(function(){
 
 ---------
 
-**License:**
-
-Free to use, Code license under [Apache v2.0](http://www.apache.org/licenses/LICENSE-2.0).
+**Free to use, Code license under [Apache v2.0](http://www.apache.org/licenses/LICENSE-2.0).**
 
 ```
 Copyright 2013 (c) Pongstr Ordillo
