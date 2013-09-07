@@ -21,9 +21,11 @@ $(window).load(function () { "use strict";
    
     $(window).scroll(function (){ 
       if ($(window).scrollTop() > headerHeight){
-          $('.substitute-btn').addClass('stick')        
-        } else {
-          $('.substitute-btn').removeClass('stick')
+        $('.substitute-btn').addClass('stick')
+          
+      } else {
+          
+        $('.substitute-btn').removeClass('stick')
       }
     })
 
@@ -38,7 +40,9 @@ $(window).load(function () { "use strict";
                
     $('html, body').stop().animate({
       'scrollTop': $target.offset().top  - 65
+      
     }, function () {
+      
       window.location.hash = target
       return false
     })
@@ -76,7 +80,7 @@ $(window).load(function () { "use strict";
         , accessToken : tkn
         , show        : target
         , count       : show
-        , pager       : true
+        , buttontext: 'Load more of that cute stuff!!'
       })
     }
   }

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * jQuery Pongstagr.am Plugin v2.0.8
+ * jQuery Pongstagr.am Plugin v3.0.0
  * ==========================================================================
  * Copyright (c) 2013 Pongstr Ordillo
  *
@@ -9,197 +9,185 @@
  * ========================================================================= */
 
 +function ($) { "use strict";
-  
 
-  // PRIVATE METHODS
+
+  // PONGSTAGR.AM CLASS DEFINITION
   // =============================
 
-
-  var Pongstgrm = {
-
-    defaults: {
-      
-        // USER AUTHENTICATION
-        // ============================
-          accessId:     null    // user id
-        , accessToken:  null    // acccess token
+  var Pongstgrm = function (element) {
+    var self = this
+    var $el  = $(element).on('load', self.access)    
+  }
 
 
-        // DISPLAY OPTIONS
-        // ============================
-        , show:         null    // options: 'profile', 'recent', 'feed', 'liked', 'user'
-        , count:        null    // options: 1(min) - 40(max), instagram limits the maximum number of media to 40
-        , likes:        null    // options: true or false (enable/disable like count)
-        , comments:     null    // options: true or false (enable/disable comment count)
+  Pongstgrm.defaults = {
+
+    // USER AUTHENTICATION
+    // ===========================
+
+      accessId:     null
+    , accessToken:  null
 
 
-        // BOOTSTRAP STYLES
-        // ============================
-        , col:        'col-xs-6 col-sm-6 col-md-3 col-lg-3'  // Sets thumbnail columns
-        , like:       'glyphicon glyphicon-heart'             // sets like icon
-        , video:      'glyphicon glyphicon-play'              // sets video icon
-        , comment:    'glyphicon glyphicon-comment'           // sets comments icon
-        , preload:    'spinner'                               // sets preloader class
-        , button:     'btn btn-success'
-        , buttontext: 'Load more'
+    // DISPLAY OPTIONS
+    // ===========================
 
-      }
+    , show:    'recent'
+    , count:    8
+    , likes:    true
+    , comments: true
 
 
-    , html: {
-        button: function (css,show) {
-          var button = document.createElement('button')
-          var render = $(button).attr({
-              'data-paginate': show
-            , 'class': css
-          }).text( Pongstgrm.defaults.buttontext )
+    // HTML OPTIONS
+    // ===========================
+    
+    , col:        'col-xs-6 col-sm-6 col-md-3 col-lg-3'
+    , like:       'glyphicon glyphicon-heart'
+    , video:      'glyphicon glyphicon-play'
+    , comment:    'glyphicon glyphicon-comment'
+    , preload:    'spinner'
+    , button:     'btn btn-success'
+    , buttontext: 'Load more'
+    
+  }
+
+
+  Pongstgrm.prototype.tag = function (tag,id,css) {
+    var element = document.createElement(tag)
+    
+    if (id)  { element.id = id }
+    if (css) { element.className = css }
+    
+    return element
+  }
+
+
+  Pongstgrm.prototype.data = function (options,element) {
+    
+    function preloader (id) {      
+      var $img = $('#'+id)
+      var  spn = '#'+id+'-ldr'
+      var  ttl = $img.length
+      var  pre = 0
+
+      $img.hide().load(function () {
+        if (++pre === ttl) {
+          $img.fadeIn()
+          $(spn).fadeOut().remove()
+        }          
+      })
+    }
+    
+    function ajaxdata (url) {
+      var p = Pongstgrm
+      var o = options
+      var t = element
+      var n = ''
+
+      $.ajax({
+          url      : url
+        , cache    : true    
+        , method   : 'GET'
+        , dataType : 'jsonp' 
+        , success  : function(data){
           
-          return render
-        }
-      
-      , tag: function (tag,id,css) {
-        var element = document.createElement(tag)
-        
-        if (id)  { element.id = id }
-        if (css) { element.className = css }
-          
-          return element
-        }
-      
-      , image: function (id,src,cap,thumbnail) {
-          var tag   = Pongstgrm.html.tag('img',id) 
-          var image = $(tag).attr({
-              'src': src
-            , 'alt': cap
+          $.each(data.data, function (a,b) {
+            
+            var caption = (b.caption !== null) ? (b.caption.text !== null) ? b.caption.text : '' : b.user.username
+            var comment = (o.comment !== null) ? (b.comments.count !== null) ? b.comments.count : '0' : ''
+            var likes   = (o.likes   !== null) ? (b.likes.count !== null) ? b.likes.count : '0' : ''
+            
+            var ldr = p.prototype.tag('div', b.id+'-thmb-ldr',o.preload)
+            var img = p.prototype.tag('img', b.id, n)
+            var blk = p.prototype.tag('div', n, o.col)
+            var tmb = p.prototype.tag('div', n, 'thumbnail')
+            var lnk = p.prototype.tag('a', n, n)
+
+            $(t).append(blk)
+            
+            $(tmb).appendTo(blk)
+            $(ldr).appendTo(tmb)
+            
+            $(lnk)
+              .appendTo(tmb)
+              .attr({
+                  'data-toggle': 'modal'
+                , 'href': '#'+b.id
+              })
+            
+              $(img).attr({
+                  'src': b.images.low_resolution.url
+                , 'id' : b.id+'-thmb'
+                , 'alt': caption
+              }).appendTo(lnk)
+              
+              preloader(b.id+'-thmb')
+              
           })
-                    
-          return image
-        }
-      
-      , thumbnail: function (child) {
-          var thumb = Pongstgrm.html.tag('div','','thumbnail')
-          var block = $(thumb).append(child)
-          
-          return block
-        }
-      }
 
-    , container: function (element,show) {
-        var button = this.html.button(this.defaults.button,show)
-        
-        $(element)
-          .attr('data-type', show)
-          .addClass('pongstgrm row')
-          .after(button)
-        
-        return
+        }  
+      })
+      
+      return
     }
 
 
-      /* Authentication */
-    , access: function (id1,id2) {
-        var access = (id1 !== null || id2 !== null) ? true : false
-        return access
-      }
-
-
-      /* Request */
-    , request: function (request,count,id,token,target) {
-        var apiurl = 'https://api.instagram.com/v1/users/'
-        var rcount = (count !== null) ? 
-          '?count=' +  count + '&access_token=' + token :
-          '?count=' +    4   + '&access_token=' + token
-        
-        switch (request) {
-          case "liked":
-          var liked = apiurl + 'self/media/liked' + rcount
-          break
-          
-          case "feed":
-          var feed = apiurl + 'self/feed' + rcount
-          break
-          
-          case "profile":
-          var profile = apiurl + id + '?access_token=' + token
-          break
-          
-          case "recent":
-          case null:
-          var recent = apiurl + id + '/media/recent' + rcount
-          this.ajx(recent,target)
-          break
-        }
-        
-        this.container(target,request)
-        return
-      }
-
-
-      /* Ajax */
-    , ajx: function (apiurl,target) {
-        $.ajax({
-            method   : 'GET'
-          , dataType : 'jsonp' 
-          , url      : apiurl
-          , cache    : true    
-          , success  : function(data){
-
-            $.each(data.data, function (a,b) {
-
-            })
-
-            Pongstgrm.more(data.pagination.next_url,target)
-          }
-        })
-        
-        return
-      }
-
-
-      /* Load more */
-    , more: function (next,target) {
-        var btn = 'test'
-        
-        if (next === undefined || next === null) {
-          $(btn).on('click', function (e) {
-            e.preventDefault()
-            
-            $(this)
-              .attr('disabled','disabled')
-              .unbind(e)
-          })
-          
-          return false
-        } else {
-          $(btn).on('click', function (e) {
-            e.preventDefault()
-            
-            $(this).unbind(e)
-          })
-          
-          return true
-        }
-        
-      }
-
-
-      /* Preload image */
-    , preload: function (imgid) {
-        var $img = $(imgid)
-        var  ttl = $img.length
-        var  spn = imgid+'-ldr'
-        var  pre = 0
-        
-        $img.hide().load(function () {
-          if (++pre === ttl) {
-            $img.fadeIn()
-            $spn.fadeOut().remove()
-          }
-        })
-        
-        return      
-      }
+    var apiurl = 'https://api.instagram.com/v1/users/'
+    var rcount = '?count=' +  options.count + '&access_token=' + options.accessToken  
+       
+    switch (options.show) {
+      case "liked":
+      var liked = apiurl + 'self/media/liked' + rcount
+      ajaxdata(liked)
+      break
+      
+      case "feed":
+      var feed = apiurl + 'self/feed' + rcount
+      ajaxdata(feed)
+      break
+      
+      case "profile":
+      var profile = apiurl + options.accessId + '?access_token=' + token
+      ajaxdata(profile)
+      break
+      
+      case "recent":
+      var recent = apiurl + options.accessId + '/media/recent' + rcount
+      ajaxdata(recent)
+      break
+    }
   }
+
+
+  Pongstgrm.prototype.html = function (options,element) {
+    var newbtn = Pongstgrm.prototype.tag('button','',options.button)
+    var button = $(newbtn).attr('data-paginate',options.show).text(options.buttontext)
+
+    $(element)
+      .attr('data-type',options.show)
+      .addClass('pongstgrm row')
+      .after(button)
+    
+    Pongstgrm.prototype.data(options,element)
+  }
+
+
+  Pongstgrm.prototype.access = function (options,element) {
+    if (options.accessId !== null || options.accessToken !== null) {
+      
+      Pongstgrm.prototype.html(options,element)
+      
+      return true 
+    } else {
+     
+      console.log('Please check whether your Access ID and Access Token if it\'s valid.' )
+      console.log('You may visit http://instagram.com/developer/authentication/ for more info.')      
+     
+      return false
+    }
+  }
+
+
 
 
 
@@ -207,15 +195,22 @@
   // =============================
   
   $.fn.pongstgrm = function (option) {
-    var opt = $.extend({}, Pongstgrm.defaults, option)
+    var options  = $.extend({}, Pongstgrm.defaults, option)
 
     return this.each(function () {
-      var subj = $(this)[0]
-
-      if(Pongstgrm.access(opt.accessId,opt.accessToken) !== null) {
-        Pongstgrm.request(opt.show,opt.count,opt.accessId,opt.accessToken,subj)
-      }
+      var element = $(this)[0]
+      Pongstgrm.prototype.access(options, element)
+      
+      return
     })
   }
+
+
+
+
+  // PONGSTAGR.AM DEFAULT OPTIONS
+  // =============================
+  
+  $.fn.pongstgrm.defaults = Pongstgrm.options;
 
 }(window.jQuery);

@@ -7,15 +7,15 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  * Requires: jQuery v1.10.1 and Bootstrap 3.0
  * ========================================================================= */
-.pongstagram [class*="col-"] {
-  padding: 10px;
-}
-.pongstagram .thumbnail {
+.pongstgrm .thumbnail {
   min-width: 100%;
   min-height: 252px;
   background-color: #fff;
 }
-.pongstagram .thumbnail > img {
+.pongstgrm .thumbnail > a {
+  display: block;
+}
+.pongstgrm .thumbnail > a > img {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   -ms-border-radius: 2px;
@@ -25,7 +25,7 @@
   height: auto !important;
   cursor: pointer;
 }
-.pongstagram .thumbnail > .icon-play {
+.pongstgrm .thumbnail > .icon-play {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
   opacity: 0.75;
   position: absolute;
@@ -39,7 +39,7 @@
   text-shadow: 0 1px 1px rgba(51, 51, 51, 0.55);
   color: #fff;
 }
-.pongstagram .thumbnail > .spinner {
+.pongstgrm .thumbnail > .spinner {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -50,44 +50,4 @@
   margin-top: -75px;
   margin-left: -75px;
   background: url("http://img.cdn.tl/loading2.gif") center center no-repeat;
-}
-
-.modal .modal-dialog {
-  width: 720px;
-}
-
-.modal-body {
-  position: relative;
-  min-height: 275px;
-  padding: 0;
-}
-.modal-body > .spinner {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  display: block;
-  width: 150px;
-  height: 150px;
-  margin-top: -75px;
-  margin-left: -75px;
-  background: url("http://img.cdn.tl/loading2.gif") center center no-repeat;
-}
-.modal-body > img {
-  -moz-border-radius-topleft: 3px;
-  -webkit-border-top-left-radius: 3px;
-  border-top-left-radius: 3px;
-  -moz-border-radius-topright: 3px;
-  -webkit-border-top-right-radius: 3px;
-  border-top-right-radius: 3px;
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-@media (max-width: 768px) {
-  .modal .modal-dialog {
-    width: 98%;
-  }
 }

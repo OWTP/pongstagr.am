@@ -14,19 +14,17 @@
 
 
 
-.pongstagram {
-  
-  //
-  [class*="col-"] { padding: 10px; }
-    
-  //
+.pongstgrm {
+
   .thumbnail {
     
     min-width:  100%;
     min-height: 252px;
     background-color: #fff;
     
-    > img { 
+    > a { display: block; }
+    
+    > a > img { 
       @include border-radius(2px);
       max-width: 100% !important;
       height: auto !important;
@@ -63,44 +61,44 @@
 }
 
 
-.modal {
+// .modal {
   
-  .modal-dialog {
-    width: 720px;
-  }
+//   .modal-dialog {
+//     width: 720px;
+//   }
   
-}
+// }
 
 
-.modal-body {
-  position: relative;
-  min-height: 275px;
-  padding: 0;
+// .modal-body {
+//   position: relative;
+//   min-height: 275px;
+//   padding: 0;
   
-  > .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-    display: block;
-    width: 150px;
-    height: 150px;
-    margin-top: -75px;
-    margin-left: -75px;
-    background: url("http://img.cdn.tl/loading2.gif") center center no-repeat;     
-  }
+//   > .spinner {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     z-index: 1;
+//     display: block;
+//     width: 150px;
+//     height: 150px;
+//     margin-top: -75px;
+//     margin-left: -75px;
+//     background: url("http://img.cdn.tl/loading2.gif") center center no-repeat;     
+//   }
   
-  > img {
-    @include border-top-radius(3px);
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 auto; 
-  }
-}
+//   > img {
+//     @include border-top-radius(3px);
+//     display: block;
+//     width: 100%;
+//     height: auto;
+//     margin: 0 auto; 
+//   }
+// }
 
-@media (max-width: 768px) {
-  .modal {
-    .modal-dialog { width: 98%; }
-  } 
-}
+// @media (max-width: 768px) {
+//   .modal {
+//     .modal-dialog { width: 98%; }
+//   } 
+// }
