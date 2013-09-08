@@ -1,5 +1,5 @@
 /* ==========================================================================
- * jQuery Pongstagr.am Plugin v3.0.0 pongstagr.am.scss
+ * jQuery Pongstagr.am Plugin v2.0.8 pongstagr.am.scss
  * ==========================================================================
  * Copyright (c) 2013 Pongstr Ordillo
  *
@@ -7,6 +7,46 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  * Requires: jQuery v1.10.1 and Bootstrap 3.0
  * ========================================================================= */
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-moz-keyframes rotation {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-o-keyframes rotation {
+  from {
+    -o-transform: rotate(0deg);
+  }
+
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 .pongstgrm .thumbnail {
   min-width: 100%;
   min-height: 252px;
@@ -39,15 +79,59 @@
   text-shadow: 0 1px 1px rgba(51, 51, 51, 0.55);
   color: #fff;
 }
-.pongstgrm .thumbnail > .spinner {
+
+[data-paginate="recent"],
+[data-paginate="liked"],
+[data-paginate="feed"] {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+[data-paginate="recent"] > .glyphicon,
+[data-paginate="liked"] > .glyphicon,
+[data-paginate="feed"] > .glyphicon {
+  position: relative;
+  display: inline-block;
+}
+[data-paginate="recent"] > .glyphicon-refresh,
+[data-paginate="liked"] > .glyphicon-refresh,
+[data-paginate="feed"] > .glyphicon-refresh {
+  -webkit-animation: rotation .7s infinite linear;
+  -moz-animation: rotation .7s infinite linear;
+  -o-animation: rotation .7s infinite linear;
+  animation: rotation .7s infinite linear;
+}
+
+.spinner {
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  margin: 45% auto;
+  border: 5px solid rgba(0, 174, 239, 0.15);
+  -webkit-animation: rotation .7s infinite linear;
+  -moz-animation: rotation .7s infinite linear;
+  -o-animation: rotation .7s infinite linear;
+  animation: rotation .7s infinite linear;
+}
+
+.spinner:before {
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
+  left: 0;
+  top: -5px;
+  content: "";
   display: block;
-  width: 150px;
-  height: 150px;
-  margin-top: -75px;
-  margin-left: -75px;
-  background: url("http://img.cdn.tl/loading2.gif") center center no-repeat;
+  height: 100%;
+  width: 100%;
+  border-top: 5px solid rgba(0, 174, 239, 0.8);
+  border-left: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid transparent;
 }

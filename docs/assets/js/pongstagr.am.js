@@ -46,8 +46,9 @@
     , video:      'glyphicon glyphicon-play'
     , comment:    'glyphicon glyphicon-comment'
     , preload:    'spinner'
-    , button:     'btn btn-success'
+    , button:     'btn btn-block btn-lg btn-success'
     , buttontext: 'Load more'
+    , buttonloadr:'glyphicon glyphicon-refresh'
     
   }
 
@@ -64,20 +65,58 @@
 
   Pongstgrm.prototype.data = function (options,element) {
     
-    function preloader (id) {      
+    function preloader (id) {
       var $img = $('#'+id)
       var  spn = '#'+id+'-ldr'
+
+      var btn     = $('[data-paginate="'+options.show+'"]')
+      var btnstat = document.createElement('i')
+      
+      $(btn)
+        .text('Loading ')
+        .append(btnstat)
+      $(btnstat)
+        .addClass(options.buttonloadr)
+
       var  ttl = $img.length
       var  pre = 0
-
+      
       $img.hide().load(function () {
         if (++pre === ttl) {
           $img.fadeIn()
           $(spn).fadeOut().remove()
-        }          
+          $(btn).text(options.buttontext)
+          $(btnstat).fadeOut().remove()
+        }
       })
+      
+      return
     }
     
+    function loadmore (url) {
+      var $morebtn = $('[data-paginate="'+options.show+'"]')
+
+      if (url === undefined || url === null) {
+        $morebtn.on('click', function (e) {
+          e.preventDefault()
+          
+          $(this)
+            .removeClass()
+            .addClass('btn btn-default')
+            .attr('disabled','disabled')
+        })
+      } else {
+        $morebtn.on('click', function (e) {
+          e.preventDefault()
+
+          ajaxdata(url)
+          $morebtn.unbind(e)
+        })
+      }
+
+      return
+    }
+
     function ajaxdata (url) {
       var p = Pongstgrm
       var o = options
@@ -96,7 +135,7 @@
             var caption = (b.caption !== null) ? (b.caption.text !== null) ? b.caption.text : '' : b.user.username
             var comment = (o.comment !== null) ? (b.comments.count !== null) ? b.comments.count : '0' : ''
             var likes   = (o.likes   !== null) ? (b.likes.count !== null) ? b.likes.count : '0' : ''
-            
+
             var ldr = p.prototype.tag('div', b.id+'-thmb-ldr',o.preload)
             var img = p.prototype.tag('img', b.id, n)
             var blk = p.prototype.tag('div', n, o.col)
@@ -124,7 +163,8 @@
               preloader(b.id+'-thmb')
               
           })
-
+          
+          loadmore(data.pagination.next_url)
         }  
       })
       
@@ -200,7 +240,6 @@
     return this.each(function () {
       var element = $(this)[0]
       Pongstgrm.prototype.access(options, element)
-      
       return
     })
   }

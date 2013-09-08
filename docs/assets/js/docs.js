@@ -80,7 +80,7 @@ $(window).load(function () { "use strict";
         , accessToken : tkn
         , show        : target
         , count       : show
-        , buttontext: 'Load more of that cute stuff!!'
+        , buttontext: 'Load more'
       })
     }
   }
