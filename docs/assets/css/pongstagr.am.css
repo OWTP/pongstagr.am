@@ -19,11 +19,11 @@
 
 @-moz-keyframes rotation {
   from {
-    -moz-transform: rotate(0deg);
+    -moz-transform: rot18(0deg);
   }
 
   to {
-    -moz-transform: rotate(359deg);
+    -moz-transform: rota18(359deg);
   }
 }
 
@@ -47,9 +47,12 @@
   }
 }
 
+.pongstgrm {
+  -webkit-font-smoothing: antialiased;
+}
 .pongstgrm .thumbnail {
+  position: relative;
   min-width: 100%;
-  min-height: 252px;
   background-color: #fff;
 }
 .pongstgrm .thumbnail > a {
@@ -65,13 +68,8 @@
   height: auto !important;
   cursor: pointer;
 }
-.pongstgrm .thumbnail > .icon-play {
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=75);
-  opacity: 0.75;
+.pongstgrm .thumbnail > .glyphicon {
   position: absolute;
-  top: 25px;
-  right: 20px;
-  display: block;
   width: 24px;
   height: 24px;
   font-size: 18px;
@@ -79,26 +77,13 @@
   text-shadow: 0 1px 1px rgba(51, 51, 51, 0.55);
   color: #fff;
 }
-
-[data-paginate="recent"],
-[data-paginate="liked"],
-[data-paginate="feed"] {
-  margin-left: -15px;
-  margin-right: -15px;
+.pongstgrm .thumbnail > .glyphicon span {
+  font-family: "Helvetica Neue", "Helvetica", "Lato", "Arial", sans-serif !important;
+  font-size: 12px !important;
 }
-[data-paginate="recent"] > .glyphicon,
-[data-paginate="liked"] > .glyphicon,
-[data-paginate="feed"] > .glyphicon {
-  position: relative;
-  display: inline-block;
-}
-[data-paginate="recent"] > .glyphicon-refresh,
-[data-paginate="liked"] > .glyphicon-refresh,
-[data-paginate="feed"] > .glyphicon-refresh {
-  -webkit-animation: rotation .7s infinite linear;
-  -moz-animation: rotation .7s infinite linear;
-  -o-animation: rotation .7s infinite linear;
-  animation: rotation .7s infinite linear;
+.pongstgrm .thumbnail > .glyphicon.glyphicon-play {
+  top: 10px;
+  right: 10px;
 }
 
 .spinner {
@@ -107,14 +92,17 @@
   -ms-border-radius: 100%;
   -o-border-radius: 100%;
   border-radius: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
   width: 30px;
   height: 30px;
   margin: 45% auto;
   border: 5px solid rgba(0, 174, 239, 0.15);
-  -webkit-animation: rotation .7s infinite linear;
-  -moz-animation: rotation .7s infinite linear;
-  -o-animation: rotation .7s infinite linear;
-  animation: rotation .7s infinite linear;
+  -webkit-animation: rotation .9s infinite linear;
+  -moz-animation: rotation .9s infinite linear;
+  -o-animation: rotation .9s infinite linear;
+  animation: rotation .9s infinite linear;
 }
 
 .spinner:before {
@@ -134,4 +122,30 @@
   border-left: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-right: 5px solid transparent;
+}
+
+/* */
+[data-paginate="recent"],
+[data-paginate="liked"],
+[data-paginate="feed"] {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+[data-paginate="recent"] .spinner,
+[data-paginate="liked"] .spinner,
+[data-paginate="feed"] .spinner {
+  display: inline-block;
+  vertical-align: middle;
+  width: 18px;
+  height: 18px;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 5px;
+  border-color: #91cf91;
+}
+[data-paginate="recent"] .spinner:before,
+[data-paginate="liked"] .spinner:before,
+[data-paginate="feed"] .spinner:before {
+  border-top-color: #fff;
 }
