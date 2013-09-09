@@ -17,3 +17,7 @@ baseurl:      /pongstagr.am
 source:       ./docs
 destination:  ./gh-pages/pongstagr.am/
 port:         4000
+
+# Bootstrap CDN
+cdn_css:      //netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css
+cdn_js:       //netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js
