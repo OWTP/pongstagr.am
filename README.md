@@ -1,112 +1,125 @@
 Pongstagr.am
 ==============================================
-by Pongstr [twiz.tickler@gmail.com | www.pongstr.com ]
-
 Pongstagr.am is a jquery plugin that lets you display your instagram media to your website.
-
 
 ---------
 
 #### Plugin Requirements
 
-1. Instagram account, User ID and Access Token.
-2. jQuery 1.10.2 (or jQuery 1.9.1 will also do).
-3. Bootstrap JS, actually Bootstrap Modal and its dependancies.
-
+1. Instagram Account.
+2. Latest version of [jquery](http://jquery.com).
+3. [Bootstrap](http://getbootstrap.com) front-end framework.
 
 ---------
 
-#### Usage:
+#### How to Use:
 
-1. User ID - If you have zero idea what your user id is, you may head to this 
-   [link](http://jelled.com/instagram/lookup-user-id).
-
-2. Access Token - If you have zero idea what your access token is, you may head to this
-   [link](http://jelled.com/instagram/access-token) make sure you follow the instructions 
-   on the ***How do I get my client id?*** link. 
-
-3. **jquery** must be initialised first and so as **bootstrap.js** plugins:
+1. Get your Instagram **[User ID](http://jelled.com/instagram/lookup-user-id)**.
+2. Get your Instagram **[Access Token](http://jelled.com/instagram/access-token)**.
+3. Then, Initialize **jquery** and **bootstrap js** + **css**
 
 ```html
-<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-<script src='path/to/js/bootstrap.min.js'></script>  
-<script src='path/to/js/pongstagr.am.js'></script>  
+<!doctype html>
+<html lang="en">
+<head>
+
+  ...
+
+  <!-- Stylesheets: Bootstrap CSS | Pongstagr.am CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/path/to/css/pongstagr.am.css">
+
+</head>
+<body>
+
+  ...
+
+  <!-- Plugin Dependancies: jQuery | Bootstrap JS -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>  
+
+  <!-- Load the plugin first before calling it -->
+  <script src="/path/to/js/pongstagr.am.js"></script>
+  <script>
+     $(document).ready(function () {
+
+         $('.your-selector-here').pongstgrm({
+            accessId:    'your-user-id'
+            accessToken: 'your-access-token'
+         });
+
+     });
+  </script>
+
+</body>
+</html>
 ```
+---------
 
+#### Plugin Options:
 
-
-Display recently uploaded media (displays 8 images):
-  
 ```javascript
-$('div#selector').pongstgrm({
-    accessId     : YourAccessID,
-    accessToken  : YourAccessToken
-});
-  ```
+{
+  // USER AUTHENTICATION
+  // ===========================
+    accessId:     null
+  , accessToken:  null
 
----------
+  // DISPLAY OPTIONS
+  // ===========================
+  , show:    'recent'
+  , count:    8
+  , likes:    true
+  , comments: true
 
-#### Other options:
-  
-  
-```javascript
-show       : null,    // string,  options: 'recent', 'feed', 'liked', 'user'
-count      : null,    // integer, options: 1(min) - 40(max), instagram limits the maximum number of photos to 40
-likes      : null,    // boolean, options: true or false (enable/disable like icon and count)
-comments   : null     // boolean, options: true or false (enable/disable comments icon and count)
+  // HTML OPTIONS
+  // ===========================
+  , col:        'col-xs-6 col-sm-6 col-md-3 col-lg-3'
+  , likeico:    'glyphicon glyphicon-heart'
+  , videoico:   'glyphicon glyphicon-play'
+  , commentico: 'glyphicon glyphicon-comment'
+  , preload:    'spinner'
+  , button:     'btn btn-lg btn-success'
+  , buttontext: 'Load more'
+}
 ```
+---------
 
+### Examples:
+
+- [Recent Media](http://pongstr.github.io/pongstagr.am/examples/bootstrap-recent/)
+- [Liked Media](http://pongstr.github.io/pongstagr.am/examples/bootstrap-liked/)
+- [User Feed Media](http://pongstr.github.io/pongstagr.am/examples/bootstrap-feed/)
 
 ---------
 
-#### Usage Example:
-
-```html
-<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-<script src='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js'></script>
-<script src='path/to/js/pongstagr.am.js'></script>
-
-<script>
-$(document).ready(function(){
-  
-  $('selector').pongstgrm({
-    accessId    : YourAccessID,
-    accessToken : YourAccessToken,
-    show        : 'liked',
-    count       : 8,
-    pager       : true,
-    likes       : true,
-    comments    : true
-  });
-  
-});
-</script>
-```
+### Acknowledgements 
+- **[Bootstrap](http://twitter.github.io/bootstrap/)** is created by [@mdo](http://twitter.com/mdo) &amp; [@fat](http://twitter.com/fat)
 
 ---------
 
-#### Acknowledgements 
-  
-  - **[Bootstrap](http://twitter.github.io/bootstrap/)** is created by [@mdo](http://twitter.com/mdo) &amp; [@fat](http://twitter.com/fat)
-  - **[Bootstrap-Sass](https://github.com/thomas-mcdonald/bootstrap-sass)** is created by [Thomas McDonald](https://github.com/thomas-mcdonald)
-  - **[Font Awesome](http://fontawesome.io/)** is created and maintain by [@davegandy](http://twitter.com/davegandy)
+### Pongstagr.am Plugin License 
 
----------
-
-**Free to use, Code license under [Apache v2.0](http://www.apache.org/licenses/LICENSE-2.0).**
+Free to use under [MIT License](http://opensource.org/licenses/MIT).
 
 ```
-Copyright 2013 (c) Pongstr Ordillo
+Copyright (c) 2013 Pongstr Ordillo
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-  http://www.apache.org/licenses/LICENSE-2.0
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 ```
