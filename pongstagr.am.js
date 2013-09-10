@@ -13,9 +13,7 @@
 
   // PONGSTAGR.AM CLASS DEFINITION
   // =============================
-  var Pongstgrm   = function (element) {
-    var $el  = $(element).on('load', this.access)    
-  }
+  var Pongstgrm   = function (element) {}
 
 
   Pongstgrm.defaults = {
@@ -39,7 +37,7 @@
     // HTML OPTIONS
     // ===========================
     
-    , col:        'col-xs-6 col-sm-6 col-md-3 col-lg-3'
+    , column:     'col-xs-6 col-sm-3 col-md-3 col-lg-3'
     , likeico:    'glyphicon glyphicon-heart'
     , videoico:   'glyphicon glyphicon-play'
     , commentico: 'glyphicon glyphicon-comment'
@@ -50,11 +48,33 @@
   }
 
 
-  Pongstgrm.prototype.tag = function (tag,id,css) {
-    var element = document.createElement(tag)
-
-    if (id)  { element.id = id }
-    if (css) { element.className = css }
+  Pongstgrm.prototype.tag = function (options) {
+    var element = document.createElement(options.tag)
+    
+    if (options.attr) { $(element).attr(options.attr) }
+    if (options.html) { $(element).html(options.html) }
+    if (options.text) { $(element).text(options.text) }
+    if (options.parent === true) { 
+      $(element).append(options.children) 
+    }
+    
+    switch (options.append) {
+      case 'before':
+        $(options.target).before(element)
+      break
+      
+      case 'after':
+        $(options.target).after(element)
+      break
+      
+      case 'append':
+        $(options.target).append(element)
+      break
+      
+      case 'prepend':
+        $(options.target).prepend(element)
+      break
+    }
 
     return element
   }
@@ -90,12 +110,6 @@
       return
     }
 
-    function html (parent, children) {
-      $(parent).append(children)
-      return
-    }
-
-
     function loadmore (url) {
       var $morebtn = $('[data-paginate="'+options.show+'"]')
 
@@ -121,9 +135,7 @@
     }
 
     function ajaxdata (url) {
-      var p = Pongstgrm
-      var o = options
-      var n = ''
+      var o = options      
 
       $.ajax({
           url      : url
@@ -133,43 +145,48 @@
         , success  : function(data){
           
           $.each(data.data, function (a,b) {
-            
             var caption = (b.caption !== null) ? (b.caption.text !== null) ? b.caption.text : '' : b.user.username
-            var comnt_count = (b.comments.count !== null) ? '<span>'+b.comments.count+'</span>' : '0'
-            var like_count  = (b.likes.count !== null) ? '<span>'+b.likes.count+'</span>' : '0' 
+            
+            var image = { 
+                tag: 'img'
+              , attr: {
+                    id: b.id+'-thmb'
+                  , src: b.images.low_resolution.url 
+                  , alt: caption
+                }
+            }
 
-            var lik = p.prototype.tag('i', n, o.likeico)
-            var com = p.prototype.tag('i', n, o.commentico)
+            var loader = { 
+                tag: 'div'
+              , attr: {id: b.id+'-thmb-ldr', class: o.preload}
+            }
 
-            var column = p.prototype.tag('div', n, o.col) 
-            var thumb  = p.prototype.tag('div', n, 'thumbnail')
-            var triggr = p.prototype.tag('a', n, n)
+            var link = {
+                tag: 'a'
+              , attr: {id: b.id+'-trigger', href: '#'+b.id+'-modal', 'data-toggle': 'modal' }
+              , parent: true
+              , children: Pongstgrm.prototype.tag(image)
+            }
 
-            var images  = p.prototype.tag('img', b.id, n)
-            var preload = p.prototype.tag('div', b.id+'-thmb-ldr',o.preload)
+            var thumbnail = { 
+                  tag: 'div'
+                , attr: {class: 'thumbnail' }
+                , parent: true
+                , children: [Pongstgrm.prototype.tag(link), Pongstgrm.prototype.tag(loader)]
+            }
 
-            var videoico = p.prototype.tag('i', n, o.videoico)
-            var likeico  = p.prototype.tag('i', n, o.likeico)
-            var comntico = p.prototype.tag('i', n, o.likeico)
+            var column = {
+                tag: 'div'
+              , attr: { 'class': o.column }
+              , append: 'append'
+              , target: element
+              , parent: true
+              , children: Pongstgrm.prototype.tag(thumbnail)
+            }
 
-            html(element, column)
-            html(column, thumb)
-            html(thumb, [preload , triggr])
+            Pongstgrm.prototype.tag(column)
+            preloader(b.id+'-thmb')
 
-            $(triggr).attr({
-                  'data-toggle': 'modal'
-                , href: '#'+b.id              
-            })
-
-            $(images)
-              .appendTo(triggr)
-              .attr({
-                  src: b.images.low_resolution.url
-                , id : b.id+'-thmb'
-                , alt: caption 
-              })
-
-            preloader(b.id+'-thmb')                     
           })
 
           loadmore(data.pagination.next_url)
@@ -194,7 +211,7 @@
       break
 
       case "profile":
-      var profile = apiurl + options.accessId + '?access_token=' + token
+      var profile = apiurl + options.accessId + '?access_token=' + options.token
       ajaxdata(profile)
       break
 
@@ -207,15 +224,22 @@
 
 
   Pongstgrm.prototype.html = function (options,element) {
-    var newbtn = Pongstgrm.prototype.tag('button','',options.button)
-    var button = $(newbtn).attr('data-paginate',options.show).text(options.buttontext)
-
+    var newbtn = {
+        tag: 'button'
+      , attr: { 'data-paginate': options.show, 'class': options.button }
+      , append: 'after'
+      , target: $(element)
+      , text: options.buttontext
+    }
+    
     $(element)
-      .attr('data-type',options.show)
+      .attr('data-type', options.show)
       .addClass('pongstgrm row')
-      .after(button)
-
+      
+    Pongstgrm.prototype.tag(newbtn)
     Pongstgrm.prototype.data(options,element)
+    
+    return
   }
 
 
