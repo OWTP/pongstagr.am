@@ -42,41 +42,47 @@
     , videoico:   'glyphicon glyphicon-play'
     , commentico: 'glyphicon glyphicon-comment'
     , preload:    'spinner'
-    , button:     'btn btn-lg btn-success'
+    , button:     'btn btn-lg btn-success pull-right'
     , buttontext: 'Load more'
     
   }
 
 
-  Pongstgrm.prototype.tag = function (options) {
-    var element = document.createElement(options.tag)
+  Pongstgrm.prototype.tagg = function (options, extend) {
+    var more   = (extend) ? extend : ''
+    var option   = $.extend({}, options,extend)
+    var target   = option.parent
+    var callback = (!option.callback) ? function(){} : option.callback
+    var newtag   = document.createElement(option.tag)
+
+    if (option.attr)  { $(newtag).attr(option.attr) }
+    if (option.class) { $(newtag).addClass(option.class) }
     
-    if (options.attr) { $(element).attr(options.attr) }
-    if (options.html) { $(element).html(options.html) }
-    if (options.text) { $(element).text(options.text) }
-    if (options.parent === true) { 
-      $(element).append(options.children) 
+    if (!option.text || option.html) {
+      $(newtag).html(option.html)
     }
     
-    switch (options.append) {
-      case 'before':
-        $(options.target).before(element)
-      break
-      
-      case 'after':
-        $(options.target).after(element)
-      break
-      
-      case 'append':
-        $(options.target).append(element)
-      break
-      
-      case 'prepend':
-        $(options.target).prepend(element)
-      break
+    if (!option.html || option.text) {
+      $(newtag).text(option.text)
     }
 
-    return element
+    if (!option.insert) { $(target).append(newtag) }
+
+    switch (option.insert) {      
+      case 'after':
+        if (target) { $(target).after(newtag) }
+      break
+      case 'prepend':
+        if (target) { $(target).prepend(newtag) }
+      break
+      case 'append':
+        if (target) { $(target).append(newtag) }
+      break
+    }
+    
+    callback()    
+    
+    return newtag
   }
 
 
@@ -146,45 +152,32 @@
           
           $.each(data.data, function (a,b) {
             var caption = (b.caption !== null) ? (b.caption.text !== null) ? b.caption.text : '' : b.user.username
+            var preload = Pongstgrm.prototype.tagg({
+                tag: 'div'
+              , attr: { id: b.id+'-thmb-ldr'}
+              , class: o.preload 
+            })
             
-            var image = { 
-                tag: 'img'
-              , attr: {
-                    id: b.id+'-thmb'
-                  , src: b.images.low_resolution.url 
-                  , alt: caption
-                }
-            }
-
-            var loader = { 
-                tag: 'div'
-              , attr: {id: b.id+'-thmb-ldr', class: o.preload}
-            }
-
-            var link = {
+            var link = Pongstgrm.prototype.tagg({
                 tag: 'a'
-              , attr: {id: b.id+'-trigger', href: '#'+b.id+'-modal', 'data-toggle': 'modal' }
-              , parent: true
-              , children: Pongstgrm.prototype.tag(image)
-            }
+              , attr: { href: '#'+b.id+'-modal' }
+              , html: '<img src="'+b.images.low_resolution.url+'" id="'+b.id+'-thmb'+'" alt="'+caption+'" />'
+            })
 
-            var thumbnail = { 
-                  tag: 'div'
-                , attr: {class: 'thumbnail' }
-                , parent: true
-                , children: [Pongstgrm.prototype.tag(link), Pongstgrm.prototype.tag(loader)]
-            }
-
-            var column = {
+            
+            var thumbnail = Pongstgrm.prototype.tagg({
                 tag: 'div'
-              , attr: { 'class': o.column }
-              , append: 'append'
-              , target: element
-              , parent: true
-              , children: Pongstgrm.prototype.tag(thumbnail)
-            }
-
-            Pongstgrm.prototype.tag(column)
+              , class: 'thumbnail'
+              , html: [preload,link]
+            })
+            
+            Pongstgrm.prototype.tagg({
+                tag: 'div'
+              , class: o.column
+              , parent: element
+              , html: thumbnail
+            })
+            
             preloader(b.id+'-thmb')
 
           })
@@ -224,19 +217,18 @@
 
 
   Pongstgrm.prototype.html = function (options,element) {
-    var newbtn = {
-        tag: 'button'
-      , attr: { 'data-paginate': options.show, 'class': options.button }
-      , append: 'after'
-      , target: $(element)
-      , text: options.buttontext
-    }
-    
     $(element)
       .attr('data-type', options.show)
       .addClass('pongstgrm row')
       
-    Pongstgrm.prototype.tag(newbtn)
+    Pongstgrm.prototype.tagg({
+        tag: 'button'
+      , attr: { 'data-paginate': options.show, 'class': options.button }
+      , insert: 'after'
+      , parent: element
+      , text: options.buttontext
+    })
+    
     Pongstgrm.prototype.data(options,element)
     
     return
