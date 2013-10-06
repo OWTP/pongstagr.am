@@ -49,66 +49,57 @@
 
 
   Pongstgrm.prototype.tagg = function (options, extend) {
-    var more   = (extend) ? extend : ''
+    var more     = (extend) ? extend : ''
     var option   = $.extend({}, options,extend)
-    var target   = option.parent
-    var callback = (!option.callback) ? function(){} : option.callback
     var newtag   = document.createElement(option.tag)
+    var callback = (!option.callback) ? function(){} : option.callback
 
-    if (option.attr)  { $(newtag).attr(option.attr) }
-    if (option.class) { $(newtag).addClass(option.class) }
-    
-    if (!option.text || option.html) {
-      $(newtag).html(option.html)
-    }
-    
-    if (!option.html || option.text) {
-      $(newtag).text(option.text)
-    }
+    if (option.attr) { $(newtag).attr(option.attr) }
+    if (option.css)  { $(newtag).addClass(option.css) }
 
-    if (!option.insert) { $(target).append(newtag) }
+    if (!option.text || option.html) { $(newtag).html(option.html) }
+    if (!option.html || option.text) { $(newtag).text(option.text) }
 
+    if (!option.insert) { $(option.parent).append(newtag) }
     switch (option.insert) {      
       case 'after':
-        if (target) { $(target).after(newtag) }
+        if (option.parent) { $(option.parent).after(newtag) }
       break
       case 'prepend':
-        if (target) { $(target).prepend(newtag) }
+        if (option.parent) { $(option.parent).prepend(newtag) }
       break
       case 'append':
-        if (target) { $(target).append(newtag) }
+        if (option.parent) { $(option.parent).append(newtag) }
       break
     }
-    
-    callback()    
-    
+    callback()
     return newtag
   }
 
 
   Pongstgrm.prototype.data = function (options,element) {
-    
+
     function preloader (id) {
       var $img = $('#'+id)
-      var  spn = '#'+id+'-ldr'
+      var  spn = '#'+id+'-preloadr'
+      var  ttl = $img.length
+      var  pre = 0
 
-      var btn     = $('[data-paginate="'+options.show+'"]')
+      var loadbtn = $('[data-paginate="'+options.show+'"]')
       var btnstat = document.createElement('div')
 
-      $(btn)
+      $(loadbtn)
         .text('Loading ')
         .append(btnstat)
       $(btnstat)
         .addClass(options.preload)
 
-      var  ttl = $img.length
-      var  pre = 0
 
       $img.hide().load(function () {
         if (++pre === ttl) {
           $img.fadeIn()
           $(spn).fadeOut().remove()
-          $(btn).text(options.buttontext)
+          $(loadbtn).text(options.buttontext)
           $(btnstat).fadeOut().remove()
         }
       })
@@ -116,111 +107,99 @@
       return
     }
 
-    function loadmore (url) {
-      var $morebtn = $('[data-paginate="'+options.show+'"]')
-
-      if (url === undefined || url === null) {
-        $morebtn.on('click', function (e) {
+    function paginate (url) {
+      var loadbtn = $('[data-paginate="'+options.show+'"]')
+      
+      if (url !== undefined || url !== null) {
+        $(loadbtn).on('click', function (e) {
           e.preventDefault()
-          
-          $(this)
-            .removeClass()
-            .addClass('btn btn-default')
-            .attr('disabled','disabled')
+          ajaxdata(url)
+          $(this).unbind(e)
         })
       } else {
-        $morebtn.on('click', function (e) {
+        $(loadbtn).on('click', function (e) {
           e.preventDefault()
-
-          ajaxdata(url)
-          $morebtn.unbind(e)
+          $(this)
+            .removeClass()
+            .addClass('btn btn-disabled')
         })
       }
-
-      return
     }
 
-    function ajaxdata (url) {
-      var o = options      
 
+    function ajaxdata (url) {
       $.ajax({
           url      : url
         , cache    : true    
         , method   : 'GET'
         , dataType : 'jsonp' 
         , success  : function(data){
-          
           $.each(data.data, function (a,b) {
-            var caption = (b.caption !== null) ? (b.caption.text !== null) ? b.caption.text : '' : b.user.username
-            var preload = Pongstgrm.prototype.tagg({
-                tag: 'div'
-              , attr: { id: b.id+'-thmb-ldr'}
-              , class: o.preload 
-            })
-            
+
+            var spin = '<div id="'+b.id+'-thmb-preloadr" class="'+options.preload+'" />'
+            var type = (b.type === 'video') ? Pongstgrm.prototype.tagg({ tag: 'i', css: options.videoico }) : ''
             var link = Pongstgrm.prototype.tagg({
                 tag: 'a'
               , attr: { href: '#'+b.id+'-modal' }
-              , html: '<img src="'+b.images.low_resolution.url+'" id="'+b.id+'-thmb'+'" alt="'+caption+'" />'
+              , html: '<img src="'+b.images.low_resolution.url+'" id="'+b.id+'-thmb'+'" alt="" />'
             })
 
-            
             var thumbnail = Pongstgrm.prototype.tagg({
                 tag: 'div'
-              , class: 'thumbnail'
-              , html: [preload,link]
+              , css: 'thumbnail'
+              , html: [spin, type, link]
             })
-            
+
+
             Pongstgrm.prototype.tagg({
                 tag: 'div'
-              , class: o.column
+              , css: options.column
               , parent: element
               , html: thumbnail
             })
-            
+
             preloader(b.id+'-thmb')
-
           })
-
-          loadmore(data.pagination.next_url)
-        }  
+          
+          paginate(data.pagination.next_url)         
+        }
       })
-      
-      return
+      return     
     }
 
     var apiurl = 'https://api.instagram.com/v1/users/'
-    var rcount = '?count=' +  options.count + '&access_token=' + options.accessToken  
+    var rcount = '?count='+options.count+'&access_token='+options.accessToken  
 
     switch (options.show) {
       case "liked":
-      var liked = apiurl + 'self/media/liked' + rcount
+      var liked = apiurl+'self/media/liked'+rcount
       ajaxdata(liked)
       break
 
       case "feed":
-      var feed = apiurl + 'self/feed' + rcount
+      var feed = apiurl+'self/feed'+rcount
       ajaxdata(feed)
       break
 
       case "profile":
-      var profile = apiurl + options.accessId + '?access_token=' + options.token
+      var profile = apiurl+options.accessId+'?access_token='+options.token
       ajaxdata(profile)
       break
 
       case "recent":
-      var recent = apiurl + options.accessId + '/media/recent' + rcount
+      var recent = apiurl+options.accessId+'/media/recent'+rcount
       ajaxdata(recent)
       break
     }
+    return
   }
 
 
-  Pongstgrm.prototype.html = function (options,element) {
+  Pongstgrm.prototype.render = function (options,element) {
     $(element)
       .attr('data-type', options.show)
       .addClass('pongstgrm row')
-      
+
     Pongstgrm.prototype.tagg({
         tag: 'button'
       , attr: { 'data-paginate': options.show, 'class': options.button }
@@ -228,24 +207,19 @@
       , parent: element
       , text: options.buttontext
     })
-    
+
     Pongstgrm.prototype.data(options,element)
-    
     return
   }
 
 
   Pongstgrm.prototype.access = function (options,element) {
     if (options.accessId !== null || options.accessToken !== null) {
-
-      Pongstgrm.prototype.html(options,element)
-
+      Pongstgrm.prototype.render(options,element)
       return true 
     } else {
-
       console.log('Please check whether your Access ID and Access Token if it\'s valid.' )
       console.log('You may visit http://instagram.com/developer/authentication/ for more info.')      
-
       return false
     }
   }
